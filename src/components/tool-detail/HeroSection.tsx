@@ -2,6 +2,7 @@
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
+import { getIconByName } from './ToolData';
 
 interface HeroSectionProps {
   tool: any;
@@ -13,7 +14,7 @@ const HeroSection = ({ tool }: HeroSectionProps) => {
       <div className="container mx-auto">
         <div className="flex flex-col md:flex-row items-center md:items-start gap-8">
           <div className="h-24 w-24 bg-white/10 backdrop-blur-md rounded-xl flex items-center justify-center flex-shrink-0">
-            {tool.icon}
+            {getIconByName(tool.iconName, "h-10 w-10")}
           </div>
           <div>
             <div className="flex items-center gap-3 mb-2">

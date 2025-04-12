@@ -62,25 +62,25 @@ export const sampleAnalysis = {
 };
 
 // Tool data
-interface ToolFeature {
+export interface ToolFeature {
   title: string;
   description: string;
-  icon: ReactNode;
+  iconName: string;
 }
 
-interface ToolCompetitor {
+export interface ToolCompetitor {
   name: string;
   pros: string[];
   cons: string[];
 }
 
-interface PricingPlan {
+export interface PricingPlan {
   name: string;
   price: string;
   features: string[];
 }
 
-interface ToolPricing {
+export interface ToolPricing {
   free: PricingPlan;
   pro: PricingPlan;
   enterprise: PricingPlan;
@@ -90,7 +90,7 @@ export interface Tool {
   name: string;
   description: string;
   category: string;
-  icon: ReactNode;
+  iconName: string;
   features: string[];
   useCases: string[];
   pricing: ToolPricing;
@@ -107,7 +107,7 @@ export const toolsDatabase: ToolsDatabase = {
     name: "Image Enhancer",
     description: "Enhance and upscale your images with our state-of-the-art AI technology. Remove noise, increase resolution, and improve clarity with just a few clicks.",
     category: "Image Processing",
-    icon: <Image className="h-10 w-10" />,
+    iconName: "Image",
     features: [
       "AI-powered image upscaling up to 4x resolution",
       "Noise reduction and artifact removal",
@@ -145,7 +145,7 @@ export const toolsDatabase: ToolsDatabase = {
     name: "Text Analyzer",
     description: "Analyze text for sentiment, readability, and key insights. Perfect for content creators, marketers, and researchers who need to understand and optimize their written content.",
     category: "Text Analysis",
-    icon: <MessageSquare className="h-10 w-10" />,
+    iconName: "MessageSquare",
     features: [
       "Sentiment analysis with emotional tone detection",
       "Readability scoring and optimization suggestions",
@@ -182,32 +182,32 @@ export const toolsDatabase: ToolsDatabase = {
       {
         title: "Sentiment Analysis",
         description: "Determine the emotional tone of text with precise sentiment scores",
-        icon: <Sparkles className="h-6 w-6" />
+        iconName: "Sparkles"
       },
       {
         title: "Readability Metrics",
         description: "Get Flesch-Kincaid scores and grade-level assessments of your content",
-        icon: <FileText2 className="h-6 w-6" />
+        iconName: "FileText2"
       },
       {
         title: "Keyword Extraction",
         description: "Identify the most important terms and topics in your content",
-        icon: <FileType className="h-6 w-6" />
+        iconName: "FileType"
       },
       {
         title: "Language Detection",
         description: "Automatic detection of 40+ languages for multilingual analysis",
-        icon: <MessageSquare className="h-6 w-6" />
+        iconName: "MessageSquare"
       },
       {
         title: "Entity Recognition",
         description: "Identify people, organizations, locations, and other entities",
-        icon: <CheckCircle className="h-6 w-6" />
+        iconName: "CheckCircle"
       },
       {
         title: "Style Suggestions",
         description: "Recommendations for improving clarity, engagement, and impact",
-        icon: <AlertCircle className="h-6 w-6" />
+        iconName: "AlertCircle"
       }
     ],
     competitors: [
@@ -216,4 +216,32 @@ export const toolsDatabase: ToolsDatabase = {
       { name: "CompetitorZ", pros: ["Integrated with more platforms"], cons: ["Less accurate sentiment analysis", "Higher price", "Poor customer support"] }
     ]
   }
+};
+
+// Helper function to get an icon component by name
+export const getIconByName = (iconName: string, className: string = "h-6 w-6") => {
+  const icons: { [key: string]: any } = {
+    Image,
+    MessageSquare,
+    LineChart,
+    FileText,
+    Code,
+    Mic,
+    Star,
+    Download,
+    Share,
+    Info,
+    CheckCircle,
+    PlusCircle,
+    MinusCircle,
+    ArrowRight,
+    Check,
+    FileType,
+    FileText2,
+    Sparkles,
+    AlertCircle
+  };
+
+  const IconComponent = icons[iconName];
+  return IconComponent ? <IconComponent className={className} /> : null;
 };

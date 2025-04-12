@@ -1,5 +1,6 @@
 
 import { Star } from 'lucide-react';
+import { getIconByName } from './ToolData';
 
 interface FeaturesTabProps {
   tool: any;
@@ -15,7 +16,7 @@ const FeaturesTab = ({ tool }: FeaturesTabProps) => {
         {tool.detailedFeatures && tool.detailedFeatures.map((feature: any, index: number) => (
           <div key={index} className="bg-white border border-gray-200 rounded-lg shadow-sm hover:shadow-md transition-shadow p-6">
             <div className="h-12 w-12 rounded-full bg-primary-blue/10 flex items-center justify-center mb-4">
-              {feature.icon}
+              {getIconByName(feature.iconName, "h-6 w-6")}
             </div>
             <h3 className="text-xl font-semibold text-gray-800 mb-2">{feature.title}</h3>
             <p className="text-gray-600">{feature.description}</p>

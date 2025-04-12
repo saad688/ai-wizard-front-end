@@ -5,7 +5,70 @@ import Navbar from '@/components/layout/Navbar';
 import Footer from '@/components/layout/Footer';
 import { Button } from '@/components/ui/button';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { Image, MessageSquare, LineChart, FileText, Code, Mic, Star, Download, Share, Info, CheckCircle } from 'lucide-react';
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
+import { Textarea } from '@/components/ui/textarea';
+import { Badge } from '@/components/ui/badge';
+import { Progress } from '@/components/ui/progress';
+import { 
+  Image, MessageSquare, LineChart, FileText, Code, Mic, Star, 
+  Download, Share, Info, CheckCircle, PlusCircle, MinusCircle, 
+  ArrowRight, Check, FileType, FileText2, Sparkles, AlertCircle
+} from 'lucide-react';
+
+// FAQ data
+const faqs = [
+  {
+    question: "How accurate is the sentiment analysis?",
+    answer: "Our text analyzer achieves over 90% accuracy on industry-standard benchmarks for sentiment analysis. It's trained on diverse datasets to recognize nuanced expressions across various contexts and industries."
+  },
+  {
+    question: "Can it analyze text in languages other than English?",
+    answer: "Yes, our Text Analyzer supports 40+ languages including Spanish, French, German, Chinese, Japanese, and Arabic. Language detection is automatic, or you can manually specify the language for more accurate results."
+  },
+  {
+    question: "Is my data secure when using this tool?",
+    answer: "Absolutely. We prioritize data security and privacy. Your text is encrypted during transit and processing. We don't store your analyzed content unless you explicitly save it to your account, and we never use your data to train our models."
+  },
+  {
+    question: "What's the maximum text length I can analyze?",
+    answer: "The free plan allows analysis of up to 3,000 characters per request. Pro users can analyze up to 25,000 characters, and Enterprise plans support unlimited text length with batch processing capabilities."
+  },
+  {
+    question: "Can I integrate this tool with my existing applications?",
+    answer: "Yes, Pro and Enterprise plans include API access with comprehensive documentation, allowing you to integrate our text analysis capabilities directly into your applications, websites, or workflows."
+  }
+];
+
+// Sample analysis result data
+const sampleAnalysis = {
+  sentiment: {
+    score: 0.78,
+    label: "Positive",
+    confidence: 0.92
+  },
+  readability: {
+    fleschKincaid: 65,
+    readingTime: "2 min",
+    grade: "8th grade"
+  },
+  keywords: [
+    { text: "analysis", relevance: 0.95 },
+    { text: "technology", relevance: 0.82 },
+    { text: "innovative", relevance: 0.77 },
+    { text: "solutions", relevance: 0.73 },
+    { text: "powerful", relevance: 0.68 }
+  ],
+  topics: [
+    { name: "Technology", confidence: 0.91 },
+    { name: "Business", confidence: 0.68 },
+    { name: "Innovation", confidence: 0.65 }
+  ],
+  entities: [
+    { text: "AI technology", type: "Technology" },
+    { text: "Text Analyzer", type: "Product" },
+    { text: "language processing", type: "Concept" }
+  ]
+};
 
 // Tool data (in a real app, this would come from an API)
 const toolsDatabase = {
@@ -83,7 +146,44 @@ const toolsDatabase = {
         price: "Custom",
         features: ["API access", "Custom analysis models", "Batch processing", "Dedicated support"]
       }
-    }
+    },
+    detailedFeatures: [
+      {
+        title: "Sentiment Analysis",
+        description: "Determine the emotional tone of text with precise sentiment scores",
+        icon: <Sparkles className="h-6 w-6" />
+      },
+      {
+        title: "Readability Metrics",
+        description: "Get Flesch-Kincaid scores and grade-level assessments of your content",
+        icon: <FileText2 className="h-6 w-6" />
+      },
+      {
+        title: "Keyword Extraction",
+        description: "Identify the most important terms and topics in your content",
+        icon: <FileType className="h-6 w-6" />
+      },
+      {
+        title: "Language Detection",
+        description: "Automatic detection of 40+ languages for multilingual analysis",
+        icon: <MessageSquare className="h-6 w-6" />
+      },
+      {
+        title: "Entity Recognition",
+        description: "Identify people, organizations, locations, and other entities",
+        icon: <CheckCircle className="h-6 w-6" />
+      },
+      {
+        title: "Style Suggestions",
+        description: "Recommendations for improving clarity, engagement, and impact",
+        icon: <AlertCircle className="h-6 w-6" />
+      }
+    ],
+    competitors: [
+      { name: "CompetitorX", pros: ["Lower price point"], cons: ["Limited accuracy", "Fewer languages", "Basic features only"] },
+      { name: "CompetitorY", pros: ["More visualization options"], cons: ["Slower processing", "Less intuitive interface", "No API access"] },
+      { name: "CompetitorZ", pros: ["Integrated with more platforms"], cons: ["Less accurate sentiment analysis", "Higher price", "Poor customer support"] }
+    ]
   }
 };
 
@@ -92,6 +192,8 @@ const ToolDetail = () => {
   const [tool, setTool] = useState<any>(null);
   const [loading, setLoading] = useState(true);
   const [activeTab, setActiveTab] = useState("overview");
+  const [sampleText, setSampleText] = useState("Our Text Analyzer uses advanced AI technology to provide deep insights into your content. It analyzes sentiment, readability, and key topics to help you optimize your writing for any audience. This innovative solution makes text analysis accessible and powerful.");
+  const [showAnalysis, setShowAnalysis] = useState(false);
 
   useEffect(() => {
     // In a real app, you would fetch data from an API
@@ -139,6 +241,10 @@ const ToolDetail = () => {
     );
   }
 
+  const handleAnalyzeClick = () => {
+    setShowAnalysis(true);
+  };
+
   return (
     <div className="min-h-screen flex flex-col">
       <Navbar />
@@ -151,6 +257,10 @@ const ToolDetail = () => {
                 {tool.icon}
               </div>
               <div>
+                <div className="flex items-center gap-3 mb-2">
+                  <Badge className="bg-blue-400/20 text-white border-none px-3 py-1">{tool.category}</Badge>
+                  <Badge className="bg-green-400/20 text-white border-none px-3 py-1">Popular</Badge>
+                </div>
                 <h1 className="text-4xl md:text-5xl font-bold mb-4">{tool.name}</h1>
                 <p className="text-xl mb-6 max-w-3xl">{tool.description}</p>
                 <div className="flex flex-wrap gap-4">
@@ -170,10 +280,11 @@ const ToolDetail = () => {
         <section className="py-16 px-4 md:px-6 bg-white">
           <div className="container mx-auto">
             <Tabs defaultValue="overview" className="w-full" onValueChange={setActiveTab}>
-              <TabsList className="grid w-full max-w-2xl mx-auto md:grid-cols-4 h-auto mb-12">
+              <TabsList className="grid w-full max-w-3xl mx-auto md:grid-cols-5 h-auto mb-12">
                 <TabsTrigger value="overview" className="py-3">Overview</TabsTrigger>
                 <TabsTrigger value="features" className="py-3">Features</TabsTrigger>
-                <TabsTrigger value="use-cases" className="py-3">Use Cases</TabsTrigger>
+                <TabsTrigger value="demo" className="py-3">Live Demo</TabsTrigger>
+                <TabsTrigger value="compare" className="py-3">Compare</TabsTrigger>
                 <TabsTrigger value="pricing" className="py-3">Pricing</TabsTrigger>
               </TabsList>
               
@@ -222,10 +333,44 @@ const ToolDetail = () => {
                     </div>
                   </div>
                 </div>
+
+                {/* FAQ Section */}
+                <div className="mt-16">
+                  <h2 className="text-3xl font-bold text-gray-800 mb-8 text-center">Frequently Asked Questions</h2>
+                  <div className="max-w-3xl mx-auto">
+                    <Accordion type="single" collapsible className="w-full">
+                      {faqs.map((faq, index) => (
+                        <AccordionItem key={index} value={`faq-${index}`}>
+                          <AccordionTrigger className="text-lg font-medium text-gray-800">
+                            {faq.question}
+                          </AccordionTrigger>
+                          <AccordionContent className="text-gray-600">
+                            {faq.answer}
+                          </AccordionContent>
+                        </AccordionItem>
+                      ))}
+                    </Accordion>
+                  </div>
+                </div>
               </TabsContent>
               
               <TabsContent value="features" className="mt-6">
                 <h2 className="text-3xl font-bold text-gray-800 mb-12 text-center">Powerful Features</h2>
+                
+                {/* Detailed Features Grid */}
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
+                  {tool.detailedFeatures && tool.detailedFeatures.map((feature: any, index: number) => (
+                    <div key={index} className="bg-white border border-gray-200 rounded-lg shadow-sm hover:shadow-md transition-shadow p-6">
+                      <div className="h-12 w-12 rounded-full bg-primary-blue/10 flex items-center justify-center mb-4">
+                        {feature.icon}
+                      </div>
+                      <h3 className="text-xl font-semibold text-gray-800 mb-2">{feature.title}</h3>
+                      <p className="text-gray-600">{feature.description}</p>
+                    </div>
+                  ))}
+                </div>
+                
+                {/* Simple Features List */}
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                   {tool.features.map((feature: string, index: number) => (
                     <div key={index} className="bg-gray-50 p-6 rounded-lg shadow-sm">
@@ -239,19 +384,230 @@ const ToolDetail = () => {
                 </div>
               </TabsContent>
               
-              <TabsContent value="use-cases" className="mt-6">
-                <h2 className="text-3xl font-bold text-gray-800 mb-12 text-center">How People Use {tool.name}</h2>
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-12">
-                  {tool.useCases.map((useCase: string, index: number) => (
-                    <div key={index} className="flex flex-col">
-                      <div className="h-48 bg-gray-200 rounded-lg mb-4 flex items-center justify-center">
-                        <p className="text-gray-500">Use case image would go here</p>
-                      </div>
-                      <h3 className="text-xl font-semibold text-gray-800 mb-2">Use Case {index + 1}</h3>
-                      <p className="text-gray-600">{useCase}</p>
+              <TabsContent value="demo" className="mt-6">
+                <div className="bg-white border border-gray-200 rounded-xl shadow-sm overflow-hidden max-w-4xl mx-auto">
+                  <div className="p-6 bg-gray-50 border-b border-gray-200">
+                    <h2 className="text-2xl font-bold text-gray-800">Try {tool.name} Now</h2>
+                    <p className="text-gray-600">Enter your text below and see the power of our AI analysis in action</p>
+                  </div>
+                  
+                  <div className="p-6">
+                    <Textarea 
+                      value={sampleText}
+                      onChange={(e) => setSampleText(e.target.value)}
+                      placeholder="Enter text to analyze..."
+                      className="w-full h-32 mb-4 p-3 text-gray-700"
+                    />
+                    
+                    <div className="flex justify-end mb-6">
+                      <Button 
+                        onClick={handleAnalyzeClick}
+                        className="bg-primary-blue hover:bg-primary-light text-white"
+                      >
+                        Analyze Text
+                      </Button>
                     </div>
-                  ))}
+                    
+                    {showAnalysis && (
+                      <div className="border border-gray-200 rounded-lg p-6 bg-gray-50 animate-fade-in">
+                        <h3 className="text-xl font-bold text-gray-800 mb-4">Analysis Results</h3>
+                        
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                          {/* Sentiment Analysis */}
+                          <div className="bg-white rounded-lg shadow-sm p-4 border border-gray-100">
+                            <h4 className="text-lg font-semibold text-gray-800 mb-2">Sentiment</h4>
+                            <div className="flex items-center justify-between mb-2">
+                              <span className="text-gray-600">Score: {sampleAnalysis.sentiment.score}</span>
+                              <Badge className="bg-green-100 text-green-800 hover:bg-green-100">
+                                {sampleAnalysis.sentiment.label}
+                              </Badge>
+                            </div>
+                            <Progress value={sampleAnalysis.sentiment.confidence * 100} className="h-2 mb-1" />
+                            <p className="text-xs text-gray-500 text-right">Confidence: {sampleAnalysis.sentiment.confidence * 100}%</p>
+                          </div>
+                          
+                          {/* Readability */}
+                          <div className="bg-white rounded-lg shadow-sm p-4 border border-gray-100">
+                            <h4 className="text-lg font-semibold text-gray-800 mb-2">Readability</h4>
+                            <div className="grid grid-cols-3 gap-2">
+                              <div className="text-center p-2 bg-gray-50 rounded">
+                                <p className="text-sm text-gray-500">Flesch Score</p>
+                                <p className="font-bold text-gray-800">{sampleAnalysis.readability.fleschKincaid}</p>
+                              </div>
+                              <div className="text-center p-2 bg-gray-50 rounded">
+                                <p className="text-sm text-gray-500">Reading Time</p>
+                                <p className="font-bold text-gray-800">{sampleAnalysis.readability.readingTime}</p>
+                              </div>
+                              <div className="text-center p-2 bg-gray-50 rounded">
+                                <p className="text-sm text-gray-500">Grade Level</p>
+                                <p className="font-bold text-gray-800">{sampleAnalysis.readability.grade}</p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        
+                        {/* Keywords */}
+                        <div className="bg-white rounded-lg shadow-sm p-4 border border-gray-100 mb-6">
+                          <h4 className="text-lg font-semibold text-gray-800 mb-3">Keywords</h4>
+                          <div className="flex flex-wrap gap-2">
+                            {sampleAnalysis.keywords.map((keyword: any, index: number) => (
+                              <Badge 
+                                key={index} 
+                                className="bg-blue-50 text-blue-800 hover:bg-blue-50 px-3 py-1"
+                                variant="outline"
+                              >
+                                {keyword.text}
+                                <span className="ml-1 text-xs text-blue-500">({keyword.relevance.toFixed(2)})</span>
+                              </Badge>
+                            ))}
+                          </div>
+                        </div>
+                        
+                        {/* Topics and Entities */}
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                          <div className="bg-white rounded-lg shadow-sm p-4 border border-gray-100">
+                            <h4 className="text-lg font-semibold text-gray-800 mb-3">Topics</h4>
+                            <ul className="space-y-2">
+                              {sampleAnalysis.topics.map((topic: any, index: number) => (
+                                <li key={index} className="flex justify-between items-center">
+                                  <span className="text-gray-700">{topic.name}</span>
+                                  <Progress value={topic.confidence * 100} className="w-1/2 h-2" />
+                                </li>
+                              ))}
+                            </ul>
+                          </div>
+                          
+                          <div className="bg-white rounded-lg shadow-sm p-4 border border-gray-100">
+                            <h4 className="text-lg font-semibold text-gray-800 mb-3">Entities</h4>
+                            <ul className="space-y-2">
+                              {sampleAnalysis.entities.map((entity: any, index: number) => (
+                                <li key={index} className="flex justify-between">
+                                  <span className="text-gray-700">{entity.text}</span>
+                                  <Badge variant="outline" className="bg-gray-50">
+                                    {entity.type}
+                                  </Badge>
+                                </li>
+                              ))}
+                            </ul>
+                          </div>
+                        </div>
+                      </div>
+                    )}
+                  </div>
                 </div>
+              </TabsContent>
+              
+              <TabsContent value="compare" className="mt-6">
+                <h2 className="text-3xl font-bold text-gray-800 mb-12 text-center">How We Compare</h2>
+                
+                <div className="overflow-x-auto mb-8">
+                  <table className="w-full border-collapse">
+                    <thead>
+                      <tr className="bg-gray-100">
+                        <th className="p-4 text-left font-semibold text-gray-800 border-b border-gray-200 min-w-[200px]">Features</th>
+                        <th className="p-4 text-center font-semibold text-gray-800 border-b border-gray-200 min-w-[180px]">
+                          <span className="block text-primary-blue">{tool.name}</span>
+                        </th>
+                        {tool.competitors && tool.competitors.map((competitor: any, index: number) => (
+                          <th key={index} className="p-4 text-center font-semibold text-gray-800 border-b border-gray-200 min-w-[180px]">
+                            {competitor.name}
+                          </th>
+                        ))}
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td className="p-4 border-b border-gray-200 font-medium text-gray-700">Sentiment Analysis</td>
+                        <td className="p-4 border-b border-gray-200 text-center"><Check className="h-5 w-5 text-green-500 mx-auto" /></td>
+                        <td className="p-4 border-b border-gray-200 text-center"><Check className="h-5 w-5 text-green-500 mx-auto" /></td>
+                        <td className="p-4 border-b border-gray-200 text-center"><Check className="h-5 w-5 text-green-500 mx-auto" /></td>
+                        <td className="p-4 border-b border-gray-200 text-center"><Check className="h-5 w-5 text-green-500 mx-auto" /></td>
+                      </tr>
+                      <tr>
+                        <td className="p-4 border-b border-gray-200 font-medium text-gray-700">Readability Metrics</td>
+                        <td className="p-4 border-b border-gray-200 text-center"><Check className="h-5 w-5 text-green-500 mx-auto" /></td>
+                        <td className="p-4 border-b border-gray-200 text-center"><Check className="h-5 w-5 text-green-500 mx-auto" /></td>
+                        <td className="p-4 border-b border-gray-200 text-center"><Check className="h-5 w-5 text-green-500 mx-auto" /></td>
+                        <td className="p-4 border-b border-gray-200 text-center"><MinusCircle className="h-5 w-5 text-gray-300 mx-auto" /></td>
+                      </tr>
+                      <tr>
+                        <td className="p-4 border-b border-gray-200 font-medium text-gray-700">Keyword Extraction</td>
+                        <td className="p-4 border-b border-gray-200 text-center"><Check className="h-5 w-5 text-green-500 mx-auto" /></td>
+                        <td className="p-4 border-b border-gray-200 text-center"><Check className="h-5 w-5 text-green-500 mx-auto" /></td>
+                        <td className="p-4 border-b border-gray-200 text-center"><MinusCircle className="h-5 w-5 text-gray-300 mx-auto" /></td>
+                        <td className="p-4 border-b border-gray-200 text-center"><Check className="h-5 w-5 text-green-500 mx-auto" /></td>
+                      </tr>
+                      <tr>
+                        <td className="p-4 border-b border-gray-200 font-medium text-gray-700">Grammar Checking</td>
+                        <td className="p-4 border-b border-gray-200 text-center"><Check className="h-5 w-5 text-green-500 mx-auto" /></td>
+                        <td className="p-4 border-b border-gray-200 text-center"><MinusCircle className="h-5 w-5 text-gray-300 mx-auto" /></td>
+                        <td className="p-4 border-b border-gray-200 text-center"><Check className="h-5 w-5 text-green-500 mx-auto" /></td>
+                        <td className="p-4 border-b border-gray-200 text-center"><MinusCircle className="h-5 w-5 text-gray-300 mx-auto" /></td>
+                      </tr>
+                      <tr>
+                        <td className="p-4 border-b border-gray-200 font-medium text-gray-700">Multiple Languages</td>
+                        <td className="p-4 border-b border-gray-200 text-center"><Check className="h-5 w-5 text-green-500 mx-auto" /></td>
+                        <td className="p-4 border-b border-gray-200 text-center"><MinusCircle className="h-5 w-5 text-gray-300 mx-auto" /></td>
+                        <td className="p-4 border-b border-gray-200 text-center"><MinusCircle className="h-5 w-5 text-gray-300 mx-auto" /></td>
+                        <td className="p-4 border-b border-gray-200 text-center"><Check className="h-5 w-5 text-green-500 mx-auto" /></td>
+                      </tr>
+                      <tr>
+                        <td className="p-4 border-b border-gray-200 font-medium text-gray-700">API Access</td>
+                        <td className="p-4 border-b border-gray-200 text-center"><Check className="h-5 w-5 text-green-500 mx-auto" /></td>
+                        <td className="p-4 border-b border-gray-200 text-center"><MinusCircle className="h-5 w-5 text-gray-300 mx-auto" /></td>
+                        <td className="p-4 border-b border-gray-200 text-center"><Check className="h-5 w-5 text-green-500 mx-auto" /></td>
+                        <td className="p-4 border-b border-gray-200 text-center"><Check className="h-5 w-5 text-green-500 mx-auto" /></td>
+                      </tr>
+                      <tr>
+                        <td className="p-4 border-b border-gray-200 font-medium text-gray-700">Accuracy</td>
+                        <td className="p-4 border-b border-gray-200 text-center">92%</td>
+                        <td className="p-4 border-b border-gray-200 text-center">78%</td>
+                        <td className="p-4 border-b border-gray-200 text-center">85%</td>
+                        <td className="p-4 border-b border-gray-200 text-center">80%</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                
+                {tool.competitors && (
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    {tool.competitors.map((competitor: any, index: number) => (
+                      <div key={index} className="bg-gray-50 rounded-lg p-6 border border-gray-200">
+                        <h3 className="text-xl font-semibold text-gray-800 mb-4">
+                          {tool.name} vs. {competitor.name}
+                        </h3>
+                        
+                        <div className="mb-4">
+                          <h4 className="text-sm uppercase tracking-wider text-gray-500 font-semibold mb-2">
+                            {competitor.name} Advantages
+                          </h4>
+                          <ul className="space-y-2">
+                            {competitor.pros.map((pro: string, i: number) => (
+                              <li key={i} className="flex items-start text-gray-700">
+                                <PlusCircle className="h-5 w-5 text-gray-400 mr-2 flex-shrink-0 mt-0.5" />
+                                <span>{pro}</span>
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                        
+                        <div>
+                          <h4 className="text-sm uppercase tracking-wider text-gray-500 font-semibold mb-2">
+                            {competitor.name} Disadvantages
+                          </h4>
+                          <ul className="space-y-2">
+                            {competitor.cons.map((con: string, i: number) => (
+                              <li key={i} className="flex items-start text-gray-700">
+                                <MinusCircle className="h-5 w-5 text-gray-400 mr-2 flex-shrink-0 mt-0.5" />
+                                <span>{con}</span>
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                )}
               </TabsContent>
               
               <TabsContent value="pricing" className="mt-6">
@@ -290,6 +646,28 @@ const ToolDetail = () => {
                       </div>
                     </div>
                   ))}
+                </div>
+                
+                <div className="mt-12 max-w-3xl mx-auto bg-gray-50 p-6 rounded-lg border border-gray-200">
+                  <h3 className="text-xl font-semibold text-gray-800 mb-4 text-center">All Plans Include</h3>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div className="flex items-start">
+                      <CheckCircle className="h-5 w-5 text-primary-blue mr-2 flex-shrink-0 mt-0.5" />
+                      <span className="text-gray-700">Secure SSL encryption</span>
+                    </div>
+                    <div className="flex items-start">
+                      <CheckCircle className="h-5 w-5 text-primary-blue mr-2 flex-shrink-0 mt-0.5" />
+                      <span className="text-gray-700">99.9% uptime guarantee</span>
+                    </div>
+                    <div className="flex items-start">
+                      <CheckCircle className="h-5 w-5 text-primary-blue mr-2 flex-shrink-0 mt-0.5" />
+                      <span className="text-gray-700">Email support</span>
+                    </div>
+                    <div className="flex items-start">
+                      <CheckCircle className="h-5 w-5 text-primary-blue mr-2 flex-shrink-0 mt-0.5" />
+                      <span className="text-gray-700">Regular feature updates</span>
+                    </div>
+                  </div>
                 </div>
               </TabsContent>
             </Tabs>

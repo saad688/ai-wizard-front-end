@@ -1,6 +1,6 @@
 
 import { Star } from 'lucide-react';
-import { getIconByName } from './ToolData';
+import { getIconByName } from './IconHelper';
 
 interface FeaturesTabProps {
   tool: any;

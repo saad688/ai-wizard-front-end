@@ -2,7 +2,7 @@
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { getIconByName } from './ToolData';
+import { getIconByName } from './IconHelper';
 
 interface HeroSectionProps {
   tool: any;

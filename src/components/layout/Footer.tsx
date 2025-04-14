@@ -2,6 +2,7 @@
 import { Link } from 'react-router-dom';
 import { Facebook, Twitter, Linkedin, Instagram, ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import Logo from '@/components/brand/Logo';
 
 const Footer = () => {
   return (
@@ -11,7 +12,7 @@ const Footer = () => {
           {/* Company Info */}
           <div className="md:col-span-5">
             <div className="mb-6">
-              <span className="text-xl font-heading font-bold tracking-tight text-primary">AI<span className="text-secondary">Master</span></span>
+              <Logo size="lg" />
             </div>
             <p className="text-text-light mb-8 leading-relaxed max-w-md">
               Advanced AI tools for professionals, businesses, and developers.
@@ -78,7 +79,7 @@ const Footer = () => {
         {/* Bottom Info */}
         <div className="pt-8 border-t border-gray-100 flex flex-col md:flex-row justify-between items-center">
           <div className="text-text-muted text-sm mb-4 md:mb-0">
-            © 2025 AIMaster. All rights reserved.
+            © 2025 Aittoves AI Tools. All rights reserved.
           </div>
           <div className="flex space-x-8">
             <Link to="/privacy" className="text-text-muted hover:text-primary text-sm transition-colors">

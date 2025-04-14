@@ -18,8 +18,8 @@ const HeroSection = ({ tool }: HeroSectionProps) => {
       
       <div className="container mx-auto">
         <div className="flex flex-col md:flex-row items-center md:items-start gap-8">
-          <div className="h-20 w-20 bg-white shadow-soft rounded-lg flex items-center justify-center flex-shrink-0 animate-float">
-            {getIconByName(tool.iconName, "h-10 w-10 text-primary")}
+          <div className="h-20 w-20 bg-primary shadow-soft rounded-lg flex items-center justify-center flex-shrink-0 animate-float">
+            {getIconByName(tool.iconName, "h-10 w-10 text-white")}
           </div>
           <div className="max-w-3xl">
             <div className="flex flex-wrap items-center gap-3 mb-2">

@@ -1,9 +1,9 @@
-
 import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Menu, X, ChevronDown, Search } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
+import Logo from '@/components/brand/Logo';
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -37,9 +37,7 @@ const Navbar = () => {
       <div className="container mx-auto px-4 md:px-6">
         <div className="flex justify-between items-center">
           {/* Logo */}
-          <Link to="/" className="flex items-center">
-            <span className="text-xl font-heading font-medium tracking-tight text-primary">AI<span className="text-secondary">Master</span></span>
-          </Link>
+          <Logo />
 
           {/* Search Bar - Center */}
           <div className="hidden md:flex items-center mx-auto bg-gray-50 rounded-full px-4 py-2 w-full max-w-md">

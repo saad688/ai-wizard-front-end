@@ -26,19 +26,19 @@ export default {
 				background: 'hsl(var(--background))',
 				foreground: 'hsl(var(--foreground))',
 				primary: {
-					DEFAULT: '#003366', // Dark Blue
-					hover: '#0055A6', // Lighter Blue for hover
-					light: '#335C85'
+					DEFAULT: '#001E3C', // Dark Navy Blue from logo
+					hover: '#00315F', // Lighter Navy Blue for hover
+					light: '#003366'
 				},
 				secondary: {
-					DEFAULT: '#339966', // Green accent
-					light: '#4CAF82',
-					dark: '#267349'
+					DEFAULT: '#00A3FF', // Bright Blue accent
+					light: '#33B5FF',
+					dark: '#0082CC'
 				},
 				text: {
-					DEFAULT: '#333333', // Dark Gray
-					light: '#666666',
-					muted: '#888888'
+					DEFAULT: '#0A1929', // Near Black
+					light: '#334155',
+					muted: '#64748B'
 				},
 				destructive: {
 					DEFAULT: 'hsl(var(--destructive))',
@@ -49,7 +49,7 @@ export default {
 					foreground: 'hsl(var(--muted-foreground))'
 				},
 				accent: {
-					DEFAULT: '#339966', // Green accent
+					DEFAULT: '#00A3FF', // Bright Blue accent
 					foreground: '#FFFFFF'
 				},
 				popover: {

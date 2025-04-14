@@ -11,9 +11,9 @@ const Footer = () => {
           {/* Company Info */}
           <div className="md:col-span-5">
             <div className="mb-6">
-              <span className="text-xl font-heading font-light tracking-tight text-gray-900">AI<span className="font-medium">Master</span></span>
+              <span className="text-xl font-heading font-bold tracking-tight text-primary">AI<span className="text-secondary">Master</span></span>
             </div>
-            <p className="text-gray-600 mb-8 leading-relaxed max-w-md">
+            <p className="text-text-light mb-8 leading-relaxed max-w-md">
               Advanced AI tools for professionals, businesses, and developers.
               Simplifying complex tasks with cutting-edge technology.
             </p>
@@ -27,7 +27,7 @@ const Footer = () => {
 
           {/* Quick Links */}
           <div className="md:col-span-2">
-            <h3 className="text-sm font-medium text-gray-900 mb-6 uppercase tracking-wider">
+            <h3 className="text-sm font-medium text-text uppercase tracking-wider mb-6">
               Navigation
             </h3>
             <ul className="space-y-3">
@@ -42,7 +42,7 @@ const Footer = () => {
 
           {/* Tools */}
           <div className="md:col-span-2">
-            <h3 className="text-sm font-medium text-gray-900 mb-6 uppercase tracking-wider">
+            <h3 className="text-sm font-medium text-text uppercase tracking-wider mb-6">
               Tools
             </h3>
             <ul className="space-y-3">
@@ -56,10 +56,10 @@ const Footer = () => {
 
           {/* Newsletter */}
           <div className="md:col-span-3">
-            <h3 className="text-sm font-medium text-gray-900 mb-6 uppercase tracking-wider">
+            <h3 className="text-sm font-medium text-text uppercase tracking-wider mb-6">
               Stay Updated
             </h3>
-            <p className="text-gray-600 mb-4 leading-relaxed">
+            <p className="text-text-light mb-4 leading-relaxed">
               Subscribe to our newsletter for the latest updates.
             </p>
             <div className="flex">
@@ -68,7 +68,7 @@ const Footer = () => {
                 placeholder="Your email"
                 className="minimal-input w-full"
               />
-              <Button className="button-minimal ml-2">
+              <Button className="ml-2 bg-primary text-white p-2 rounded-md hover:bg-primary-hover">
                 <ArrowRight className="h-5 w-5" />
               </Button>
             </div>
@@ -77,17 +77,17 @@ const Footer = () => {
 
         {/* Bottom Info */}
         <div className="pt-8 border-t border-gray-100 flex flex-col md:flex-row justify-between items-center">
-          <div className="text-gray-500 text-sm mb-4 md:mb-0">
+          <div className="text-text-muted text-sm mb-4 md:mb-0">
             © 2025 AIMaster. All rights reserved.
           </div>
           <div className="flex space-x-8">
-            <Link to="/privacy" className="text-gray-500 hover:text-gray-900 text-sm transition-colors">
+            <Link to="/privacy" className="text-text-muted hover:text-primary text-sm transition-colors">
               Privacy Policy
             </Link>
-            <Link to="/terms" className="text-gray-500 hover:text-gray-900 text-sm transition-colors">
+            <Link to="/terms" className="text-text-muted hover:text-primary text-sm transition-colors">
               Terms of Service
             </Link>
-            <Link to="/cookies" className="text-gray-500 hover:text-gray-900 text-sm transition-colors">
+            <Link to="/cookies" className="text-text-muted hover:text-primary text-sm transition-colors">
               Cookie Policy
             </Link>
           </div>
@@ -101,7 +101,7 @@ const Footer = () => {
 const SocialLink = ({ href, icon }: { href: string; icon: React.ReactNode }) => (
   <a 
     href={href} 
-    className="text-gray-500 hover:text-gray-900 transition-colors flex items-center justify-center h-10 w-10 border border-gray-200 hover:border-gray-300"
+    className="text-text-muted hover:text-primary transition-colors flex items-center justify-center h-10 w-10 border border-gray-200 hover:border-primary rounded-md"
   >
     {icon}
   </a>
@@ -111,7 +111,7 @@ const FooterLink = ({ to, children }: { to: string; children: React.ReactNode })
   <li>
     <Link 
       to={to} 
-      className="text-gray-600 hover:text-gray-900 transition-colors link-underline"
+      className="text-text-light hover:text-primary transition-colors link-underline"
     >
       {children}
     </Link>

@@ -2,7 +2,8 @@
 import { 
   Image, MessageSquare, LineChart, FileText, Code, Mic, Star, 
   Download, Share, Info, CheckCircle, PlusCircle, MinusCircle, 
-  ArrowRight, Check, FileType, FileText as FileText2, Sparkles, AlertCircle
+  ArrowRight, Check, FileType, FileText as FileText2, Sparkles, AlertCircle,
+  MessageCircle, BarChart2, FileSearch, Cpu, Zap, BrainCircuit, Database
 } from 'lucide-react';
 
 // Helper function to get an icon component by name
@@ -26,7 +27,14 @@ export const getIconByName = (iconName: string, className: string = "h-6 w-6") =
     FileType,
     FileText2,
     Sparkles,
-    AlertCircle
+    AlertCircle,
+    MessageCircle,
+    BarChart2,
+    FileSearch,
+    Cpu,
+    Zap,
+    BrainCircuit,
+    Database
   };
 
   const IconComponent = icons[iconName];

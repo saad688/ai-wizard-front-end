@@ -1,6 +1,6 @@
 
 import { Link } from 'react-router-dom';
-import { ArrowUpRight, Image, MessageSquare, Database, FileText, Zap, Mic } from 'lucide-react';
+import { ArrowUpRight, Sparkles, MessageCircle, BarChart2, FileSearch, Cpu, Mic } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
 
 const tools = [
@@ -8,7 +8,7 @@ const tools = [
     id: 1,
     name: 'Image Enhancer',
     description: 'Improve quality and resolution of any image with our advanced AI upscaling technology.',
-    icon: Image,
+    icon: Sparkles,
     path: '/tools/image-enhancer',
     category: 'Image Processing'
   },
@@ -16,7 +16,7 @@ const tools = [
     id: 2,
     name: 'Text Analyzer',
     description: 'Extract insights, sentiment, and key information from any text with our NLP engine.',
-    icon: MessageSquare,
+    icon: MessageCircle,
     path: '/tools/text-analyzer',
     category: 'NLP'
   },
@@ -24,7 +24,7 @@ const tools = [
     id: 3,
     name: 'Data Visualizer',
     description: 'Transform complex datasets into beautiful, interactive visualizations instantly.',
-    icon: Database,
+    icon: BarChart2,
     path: '/tools/data-visualizer',
     category: 'Data Analysis'
   },
@@ -32,7 +32,7 @@ const tools = [
     id: 4,
     name: 'Document Parser',
     description: 'Automatically extract structured data from various document formats with high accuracy.',
-    icon: FileText,
+    icon: FileSearch,
     path: '/tools/document-parser',
     category: 'Document Processing'
   },
@@ -40,7 +40,7 @@ const tools = [
     id: 5,
     name: 'Code Assistant',
     description: 'Get intelligent code suggestions, bug fixes, and optimizations as you type.',
-    icon: Zap,
+    icon: Cpu,
     path: '/tools/code-assistant',
     category: 'Development'
   },

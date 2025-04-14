@@ -8,39 +8,38 @@ interface CallToActionProps {
 
 const CallToAction = ({ tool }: CallToActionProps) => {
   return (
-    <section className="py-20 px-4 md:px-6 relative overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-to-br from-blue-600 to-blue-400 -z-10"></div>
-      <div className="absolute inset-0 bg-[url('/grid-pattern.svg')] opacity-10 -z-10"></div>
+    <section className="py-24 px-4 md:px-6 relative overflow-hidden bg-gray-50">
+      <div className="absolute inset-0 bg-gray-50 -z-10"></div>
       <div className="container mx-auto relative z-10">
         <div className="max-w-3xl mx-auto text-center">
-          <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
-            Ready to Try {tool.name}?
+          <h2 className="text-3xl md:text-4xl font-heading font-light text-gray-900 mb-6">
+            Ready to Try <span className="font-medium">{tool.name}</span>?
           </h2>
-          <p className="text-xl text-blue-100 mb-10 leading-relaxed">
+          <p className="text-xl text-gray-600 mb-12 leading-relaxed">
             Join thousands of users who are already transforming their {tool.category.toLowerCase()} with our AI-powered solution.
           </p>
-          <div className="flex flex-col sm:flex-row justify-center gap-4">
-            <Button size="lg" className="bg-white text-blue-600 hover:bg-blue-50 text-lg px-8 py-6 font-medium rounded-xl shadow-lg">
+          <div className="flex flex-col sm:flex-row justify-center gap-6">
+            <Button className="button-primary text-lg group">
               Get Started For Free
-              <ArrowRight className="ml-2 h-5 w-5" />
+              <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
             </Button>
-            <Button size="lg" variant="outline" className="bg-transparent border-white hover:bg-white/10 text-white text-lg px-8 py-6 font-medium rounded-xl">
+            <Button variant="outline" className="border-gray-900 text-gray-900 hover:bg-gray-50 rounded-none py-3 px-6 text-lg flex items-center">
               <Calendar className="mr-2 h-5 w-5" />
               Schedule a Demo
             </Button>
           </div>
           
-          <div className="mt-12 pt-12 border-t border-blue-300/30 text-blue-100 flex flex-col sm:flex-row justify-center gap-8">
+          <div className="mt-16 pt-16 border-t border-gray-200 text-gray-600 flex flex-col sm:flex-row justify-center gap-12">
             <div className="flex items-center justify-center gap-2">
-              <div className="h-3 w-3 rounded-full bg-blue-200"></div>
+              <div className="h-1.5 w-1.5 rounded-full bg-gray-900"></div>
               <span>No credit card required</span>
             </div>
             <div className="flex items-center justify-center gap-2">
-              <div className="h-3 w-3 rounded-full bg-blue-200"></div>
+              <div className="h-1.5 w-1.5 rounded-full bg-gray-900"></div>
               <span>14-day free trial</span>
             </div>
             <div className="flex items-center justify-center gap-2">
-              <div className="h-3 w-3 rounded-full bg-blue-200"></div>
+              <div className="h-1.5 w-1.5 rounded-full bg-gray-900"></div>
               <span>Cancel anytime</span>
             </div>
           </div>

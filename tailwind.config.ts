@@ -28,8 +28,8 @@ export default {
 				primary: {
 					DEFAULT: 'hsl(var(--primary))',
 					foreground: 'hsl(var(--primary-foreground))',
-					blue: '#3B82F6',
-					light: '#60A5FA'
+					blue: '#111827',
+					light: '#4B5563'
 				},
 				secondary: {
 					DEFAULT: 'hsl(var(--secondary))',
@@ -68,8 +68,8 @@ export default {
 				}
 			},
 			fontFamily: {
-				sans: ['Inter', 'Open Sans', 'Roboto', 'sans-serif'],
-				heading: ['Poppins', 'Raleway', 'Lato', 'sans-serif']
+				sans: ['Inter', 'sans-serif'],
+				heading: ['Poppins', 'sans-serif']
 			},
 			borderRadius: {
 				lg: 'var(--radius)',
@@ -90,7 +90,7 @@ export default {
 					'100%': { opacity: '1' }
 				},
 				'fade-up': {
-					'0%': { opacity: '0', transform: 'translateY(10px)' },
+					'0%': { opacity: '0', transform: 'translateY(20px)' },
 					'100%': { opacity: '1', transform: 'translateY(0)' }
 				},
 				'pulse-subtle': {
@@ -104,20 +104,32 @@ export default {
 				'scale-in': {
 					'0%': { transform: 'scale(0.95)', opacity: '0' },
 					'100%': { transform: 'scale(1)', opacity: '1' }
+				},
+				'slide-in': {
+					'0%': { transform: 'translateX(-100%)', opacity: '0' },
+					'100%': { transform: 'translateX(0)', opacity: '1' }
+				},
+				'reveal': {
+					'0%': { transform: 'scaleX(0)', transformOrigin: 'left' },
+					'100%': { transform: 'scaleX(1)', transformOrigin: 'left' }
 				}
 			},
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
 				'accordion-up': 'accordion-up 0.2s ease-out',
-				'fade-in': 'fade-in 0.5s ease-out',
-				'fade-up': 'fade-up 0.5s ease-out',
+				'fade-in': 'fade-in 0.7s ease-out',
+				'fade-up': 'fade-up 0.7s ease-out',
+				'fade-up-slow': 'fade-up 1s ease-out 0.3s forwards',
+				'fade-up-slower': 'fade-up 1s ease-out 0.6s forwards',
 				'pulse-subtle': 'pulse-subtle 2s infinite',
 				'float': 'float 6s ease-in-out infinite',
-				'scale-in': 'scale-in 0.3s ease-out'
+				'scale-in': 'scale-in 0.5s ease-out',
+				'slide-in': 'slide-in 0.7s ease-out',
+				'reveal': 'reveal 1s ease-out forwards'
 			},
 			boxShadow: {
-				'soft': '0 4px 12px rgba(0, 0, 0, 0.05)',
-				'glow': '0 0 20px rgba(59, 130, 246, 0.15)'
+				'soft': '0 4px 20px rgba(0, 0, 0, 0.03)',
+				'glow': '0 0 20px rgba(17, 24, 39, 0.15)'
 			}
 		}
 	},

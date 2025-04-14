@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Menu, X, ChevronDown, Search } from 'lucide-react';
@@ -22,9 +23,10 @@ const Navbar = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const tools = [
-    { name: 'Image Processing', path: '/tools/image-enhancer' },
-    { name: 'Natural Language Processing', path: '/tools/text-analyzer' },
+  const toolCategories = [
+    { name: 'Machine Learning', path: '/tools/machine-learning' },
+    { name: 'Natural Language Processing', path: '/tools/nlp' },
+    { name: 'Computer Vision', path: '/tools/computer-vision' },
     { name: 'Data Analysis', path: '/tools/data-analysis' },
     { name: 'Voice Recognition', path: '/tools/voice-recognition' },
   ];
@@ -67,20 +69,21 @@ const Navbar = () => {
               </button>
               {isToolsDropdownOpen && (
                 <div className="absolute top-full mt-2 py-2 w-64 bg-white border border-gray-100 rounded-md shadow-soft z-20 animate-fade-in">
-                  {tools.map((tool) => (
+                  {toolCategories.map((category) => (
                     <Link
-                      key={tool.name}
-                      to={tool.path}
+                      key={category.name}
+                      to={category.path}
                       className="flex items-center px-4 py-2.5 text-sm text-text-light hover:bg-gray-50 hover:text-primary"
                     >
-                      {tool.name}
+                      {category.name}
                     </Link>
                   ))}
                 </div>
               )}
             </div>
+            <NavLink to="/documentation" active={location.pathname === '/documentation'}>Documentation</NavLink>
+            <NavLink to="/community" active={location.pathname === '/community'}>Community</NavLink>
             <NavLink to="/about" active={location.pathname === '/about'}>About</NavLink>
-            <NavLink to="/contact" active={location.pathname === '/contact'}>Contact</NavLink>
           </div>
 
           {/* CTA */}
@@ -123,19 +126,20 @@ const Navbar = () => {
               </button>
               {isToolsDropdownOpen && (
                 <div className="pl-4 space-y-4">
-                  {tools.map((tool) => (
+                  {toolCategories.map((category) => (
                     <Link
-                      key={tool.name}
-                      to={tool.path}
+                      key={category.name}
+                      to={category.path}
                       className="flex items-center py-1.5 text-text-light hover:text-primary transition-colors"
                     >
-                      {tool.name}
+                      {category.name}
                     </Link>
                   ))}
                 </div>
               )}
+              <MobileNavLink to="/documentation" active={location.pathname === '/documentation'}>Documentation</MobileNavLink>
+              <MobileNavLink to="/community" active={location.pathname === '/community'}>Community</MobileNavLink>
               <MobileNavLink to="/about" active={location.pathname === '/about'}>About</MobileNavLink>
-              <MobileNavLink to="/contact" active={location.pathname === '/contact'}>Contact</MobileNavLink>
               
               <Button className="button-primary w-full mt-8">
                 Get Started

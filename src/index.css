@@ -11,19 +11,19 @@
     --card-foreground: 210 80% 10%;
     --popover: 0 0% 100%;
     --popover-foreground: 210 80% 10%;
-    --primary: 210 100% 12%;
+    --primary: 210 100% 20%;
     --primary-foreground: 0 0% 100%;
-    --secondary: 200 100% 50%;
+    --secondary: 210 50% 40%;
     --secondary-foreground: 0 0% 100%;
     --muted: 210 40% 96%;
     --muted-foreground: 215 25% 27%;
-    --accent: 200 100% 50%;
+    --accent: 210 50% 40%;
     --accent-foreground: 0 0% 100%;
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 100%;
     --border: 214.3 31.8% 91.4%;
     --input: 214.3 31.8% 91.4%;
-    --ring: 210 100% 12%;
+    --ring: 210 100% 20%;
     --radius: 0.5rem;
   }
 
@@ -34,13 +34,13 @@
     --card-foreground: 0 0% 100%;
     --popover: 210 70% 8%;
     --popover-foreground: 0 0% 100%;
-    --primary: 210 100% 12%;
+    --primary: 210 100% 20%;
     --primary-foreground: 0 0% 100%;
-    --secondary: 200 100% 50%;
+    --secondary: 210 50% 40%;
     --secondary-foreground: 0 0% 100%;
     --muted: 210 30% 15%;
     --muted-foreground: 215 20% 65%;
-    --accent: 200 100% 50%;
+    --accent: 210 50% 40%;
     --accent-foreground: 0 0% 100%;
     --destructive: 0 70% 50%;
     --destructive-foreground: 0 0% 100%;
@@ -119,6 +119,14 @@
   
   .button-accent {
     @apply bg-secondary hover:bg-secondary-light text-white rounded-md px-6 py-3 transition-all duration-300 font-medium;
+  }
+  
+  .button-success {
+    @apply bg-success hover:bg-success-light text-white rounded-md px-6 py-3 transition-all duration-300 font-medium;
+  }
+  
+  .button-warning {
+    @apply bg-warning hover:bg-warning-light text-white rounded-md px-6 py-3 transition-all duration-300 font-medium;
   }
 }
 

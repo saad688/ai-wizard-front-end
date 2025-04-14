@@ -26,19 +26,29 @@ export default {
 				background: 'hsl(var(--background))',
 				foreground: 'hsl(var(--foreground))',
 				primary: {
-					DEFAULT: '#001E3C', // Dark Navy Blue from logo
-					hover: '#00315F', // Lighter Navy Blue for hover
-					light: '#003366'
+					DEFAULT: '#003366', // Deep Blue
+					hover: '#0055A6', // Lighter Blue for hover
+					light: '#336699' // Light Blue for accents
 				},
 				secondary: {
-					DEFAULT: '#00A3FF', // Bright Blue accent
-					light: '#33B5FF',
-					dark: '#0082CC'
+					DEFAULT: '#336699', // Light Blue
+					light: '#4D80B3',
+					dark: '#264D73'
 				},
 				text: {
-					DEFAULT: '#0A1929', // Near Black
-					light: '#334155',
-					muted: '#64748B'
+					DEFAULT: '#333333', // Dark Gray
+					light: '#666666',
+					muted: '#999999'
+				},
+				success: {
+					DEFAULT: '#339966', // Green
+					light: '#4DB380',
+					dark: '#267349'
+				},
+				warning: {
+					DEFAULT: '#FF9900', // Orange
+					light: '#FFAD33',
+					dark: '#CC7A00'
 				},
 				destructive: {
 					DEFAULT: 'hsl(var(--destructive))',
@@ -49,7 +59,7 @@ export default {
 					foreground: 'hsl(var(--muted-foreground))'
 				},
 				accent: {
-					DEFAULT: '#00A3FF', // Bright Blue accent
+					DEFAULT: '#336699', // Light Blue accent
 					foreground: '#FFFFFF'
 				},
 				popover: {
@@ -62,8 +72,9 @@ export default {
 				}
 			},
 			fontFamily: {
-				sans: ['Poppins', 'sans-serif'],
-				heading: ['Montserrat', 'sans-serif']
+				sans: ['Open Sans', 'Lato', 'sans-serif'],
+				heading: ['Montserrat', 'Roboto', 'sans-serif'],
+				mono: ['Fira Code', 'monospace']
 			},
 			borderRadius: {
 				lg: 'var(--radius)',

@@ -18,17 +18,19 @@ const HeroSection = ({ tool }: HeroSectionProps) => {
       
       <div className="container mx-auto">
         <div className="flex flex-col md:flex-row items-center md:items-start gap-8">
-          <div className="h-20 w-20 bg-primary shadow-soft rounded-lg flex items-center justify-center flex-shrink-0 animate-float">
-            {getIconByName(tool.iconName, "h-10 w-10 text-white")}
+          <div className="h-24 w-24 bg-primary shadow-soft rounded-lg flex items-center justify-center flex-shrink-0 animate-float">
+            {getIconByName(tool.iconName, "h-12 w-12 text-white")}
           </div>
           <div className="max-w-3xl">
             <div className="flex flex-wrap items-center gap-3 mb-2">
               <Badge className="bg-secondary/10 hover:bg-secondary/20 text-secondary border-none font-medium px-3 py-1 rounded-md">
                 {tool.category}
               </Badge>
-              <Badge className="bg-primary/10 hover:bg-primary/20 text-primary border-none font-medium px-3 py-1 rounded-md">
-                Popular
-              </Badge>
+              {tool.popular && (
+                <Badge className="bg-success/10 hover:bg-success/20 text-success border-none font-medium px-3 py-1 rounded-md">
+                  Popular
+                </Badge>
+              )}
             </div>
             <h1 className={cn(
               "text-4xl md:text-5xl lg:text-6xl font-bold mb-6 tracking-tight font-heading",

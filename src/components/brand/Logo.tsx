@@ -1,6 +1,6 @@
 
 import { Link } from 'react-router-dom';
-import { Share2 } from 'lucide-react';
+import { BrainCircuit } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 interface LogoProps {
@@ -26,7 +26,7 @@ const Logo = ({ className, showText = true, size = 'md', textColor = 'text-prima
   return (
     <Link to="/" className={cn("flex items-center gap-3", className)}>
       <div className={cn("bg-primary flex items-center justify-center rounded-lg", logoSizes[size])}>
-        <Share2 className="text-white transform rotate-90" style={{ strokeWidth: 2.5 }} />
+        <BrainCircuit className="text-white" style={{ strokeWidth: 2 }} />
       </div>
       
       {showText && (

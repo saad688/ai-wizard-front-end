@@ -28,14 +28,14 @@ const Footer = () => {
 
           {/* Quick Links */}
           <div className="md:col-span-2">
-            <h3 className="text-sm font-medium text-text uppercase tracking-wider mb-6">
+            <h3 className="text-sm font-medium text-text uppercase tracking-wider mb-6 font-heading">
               Navigation
             </h3>
             <ul className="space-y-3">
               <FooterLink to="/">Home</FooterLink>
               <FooterLink to="/tools">All Tools</FooterLink>
-              <FooterLink to="/pricing">Pricing</FooterLink>
-              <FooterLink to="/blog">Blog</FooterLink>
+              <FooterLink to="/documentation">Documentation</FooterLink>
+              <FooterLink to="/community">Community</FooterLink>
               <FooterLink to="/about">About Us</FooterLink>
               <FooterLink to="/contact">Contact</FooterLink>
             </ul>
@@ -43,7 +43,7 @@ const Footer = () => {
 
           {/* Tools */}
           <div className="md:col-span-2">
-            <h3 className="text-sm font-medium text-text uppercase tracking-wider mb-6">
+            <h3 className="text-sm font-medium text-text uppercase tracking-wider mb-6 font-heading">
               Tools
             </h3>
             <ul className="space-y-3">
@@ -57,7 +57,7 @@ const Footer = () => {
 
           {/* Newsletter */}
           <div className="md:col-span-3">
-            <h3 className="text-sm font-medium text-text uppercase tracking-wider mb-6">
+            <h3 className="text-sm font-medium text-text uppercase tracking-wider mb-6 font-heading">
               Stay Updated
             </h3>
             <p className="text-text-light mb-4 leading-relaxed">
@@ -69,7 +69,7 @@ const Footer = () => {
                 placeholder="Your email"
                 className="minimal-input w-full"
               />
-              <Button className="ml-2 bg-primary text-white p-2 rounded-md hover:bg-primary-hover">
+              <Button className="ml-2 bg-success text-white p-2 rounded-md hover:bg-success-light">
                 <ArrowRight className="h-5 w-5" />
               </Button>
             </div>

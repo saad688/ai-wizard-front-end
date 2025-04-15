@@ -104,6 +104,11 @@
   .button-primary {
     @apply bg-gray-900 hover:bg-gray-800 text-white rounded-none px-6 py-3 transition-all duration-300;
   }
+  
+  /* Glow effect for elements */
+  .glow {
+    box-shadow: 0 0 15px rgba(99, 102, 241, 0.5), 0 0 30px rgba(99, 102, 241, 0.3), 0 0 45px rgba(99, 102, 241, 0.1);
+  }
 }
 
 @layer utilities {
@@ -183,6 +188,36 @@
     animation: fade-in 0.8s ease-out forwards;
   }
   
+  /* New animations for enhanced sections */
+  @keyframes gradient-shift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+  
+  .animate-gradient-shift {
+    animation: gradient-shift 8s ease infinite;
+    background-size: 200% 200%;
+  }
+  
+  @keyframes bounce-subtle {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-5px); }
+  }
+  
+  .animate-bounce-subtle {
+    animation: bounce-subtle 3s ease-in-out infinite;
+  }
+  
+  @keyframes ripple {
+    0% { transform: scale(0.8); opacity: 1; }
+    100% { transform: scale(2); opacity: 0; }
+  }
+  
+  .animate-ripple {
+    animation: ripple 2s ease-out infinite;
+  }
+  
   /* Hover effects */
   .hover-lift {
     @apply transition-transform duration-300 hover:-translate-y-1;
@@ -190,5 +225,15 @@
   
   .hover-glow {
     @apply transition-shadow duration-300 hover:shadow-lg;
+  }
+  
+  /* 3D effect for cards */
+  .card-3d {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .card-3d:hover {
+    transform: translateY(-5px) rotateX(2deg) rotateY(2deg);
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
   }
 }

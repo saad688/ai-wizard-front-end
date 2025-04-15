@@ -11,10 +11,15 @@ const About = () => {
       <Navbar />
       <main className="flex-grow">
         {/* Hero Section */}
-        <section className="py-20 px-4 md:px-6 gradient-bg text-white">
-          <div className="container mx-auto text-center">
-            <h1 className="text-4xl md:text-5xl font-bold mb-6">About AIMaster</h1>
-            <p className="text-xl max-w-3xl mx-auto mb-10">
+        <section className="py-20 px-4 md:px-6 bg-gradient-to-b from-gray-50 to-white relative overflow-hidden">
+          <div className="absolute top-0 left-0 w-full h-full opacity-50 pointer-events-none">
+            <img src="/images/ai-pattern-1.svg" alt="" className="w-full h-full object-cover" aria-hidden="true" />
+          </div>
+          <div className="container mx-auto text-center relative z-10">
+            <h1 className="text-4xl md:text-5xl font-heading font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-gray-900 to-gray-700">
+              About AIMaster
+            </h1>
+            <p className="text-xl max-w-3xl mx-auto mb-10 text-gray-600">
               We're on a mission to make powerful AI tools accessible to everyone.
               Learn about our journey, our team, and the technology that powers our solutions.
             </p>
@@ -25,8 +30,8 @@ const About = () => {
         <section className="py-16 px-4 md:px-6 bg-white">
           <div className="container mx-auto">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-              <div>
-                <h2 className="text-3xl font-bold text-gray-800 mb-6">Our Story</h2>
+              <div className="opacity-0 translate-y-8 animate-fade-up">
+                <h2 className="text-3xl font-bold text-gray-800 mb-6 font-heading">Our Story</h2>
                 <p className="text-lg text-gray-600 mb-6">
                   Founded in 2023, AIMaster began with a simple idea: make cutting-edge AI 
                   technology accessible to everyone, not just tech giants and specialized researchers.
@@ -41,7 +46,7 @@ const About = () => {
                   allowing our users to harness the potential of artificial intelligence without needing a PhD in computer science.
                 </p>
               </div>
-              <div className="rounded-lg overflow-hidden shadow-xl">
+              <div className="rounded-lg overflow-hidden shadow-xl transform transition-all duration-500 hover:scale-105 opacity-0 translate-y-8 animate-fade-up animate-delay-200">
                 <img
                   src="https://images.unsplash.com/photo-1553877522-43269d4ea984?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fHRlYW18ZW58MHwwfDB8fHww&auto=format&fit=crop&w=800&q=60"
                   alt="Our team collaborating"
@@ -53,11 +58,14 @@ const About = () => {
         </section>
 
         {/* Core Values */}
-        <section className="py-16 px-4 md:px-6 bg-gray-50">
-          <div className="container mx-auto">
-            <h2 className="text-3xl font-bold text-center text-gray-800 mb-12">Our Core Values</h2>
+        <section className="py-16 px-4 md:px-6 bg-gradient-to-b from-white to-gray-50 relative overflow-hidden">
+          <div className="absolute top-0 left-0 w-full h-full opacity-30 pointer-events-none">
+            <img src="/images/ai-pattern-1.svg" alt="" className="w-full h-full object-cover" aria-hidden="true" />
+          </div>
+          <div className="container mx-auto relative z-10">
+            <h2 className="text-3xl font-bold text-center text-gray-800 mb-12 font-heading">Our Core Values</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-              <div className="bg-white p-8 rounded-lg shadow-md">
+              <div className="bg-white p-8 rounded-lg shadow-md transform transition-all duration-500 hover:shadow-xl hover:-translate-y-1 opacity-0 translate-y-8 animate-fade-up">
                 <div className="h-14 w-14 rounded-full bg-primary-blue/10 flex items-center justify-center mb-6">
                   <Users className="h-7 w-7 text-primary-blue" />
                 </div>
@@ -66,7 +74,7 @@ const About = () => {
                   We design all our tools with the user in mind, ensuring they're intuitive and effective for real-world needs.
                 </p>
               </div>
-              <div className="bg-white p-8 rounded-lg shadow-md">
+              <div className="bg-white p-8 rounded-lg shadow-md transform transition-all duration-500 hover:shadow-xl hover:-translate-y-1 opacity-0 translate-y-8 animate-fade-up animate-delay-100">
                 <div className="h-14 w-14 rounded-full bg-primary-blue/10 flex items-center justify-center mb-6">
                   <Award className="h-7 w-7 text-primary-blue" />
                 </div>
@@ -75,7 +83,7 @@ const About = () => {
                   We're committed to the highest standards of technical excellence and continuous improvement.
                 </p>
               </div>
-              <div className="bg-white p-8 rounded-lg shadow-md">
+              <div className="bg-white p-8 rounded-lg shadow-md transform transition-all duration-500 hover:shadow-xl hover:-translate-y-1 opacity-0 translate-y-8 animate-fade-up animate-delay-200">
                 <div className="h-14 w-14 rounded-full bg-primary-blue/10 flex items-center justify-center mb-6">
                   <Heart className="h-7 w-7 text-primary-blue" />
                 </div>
@@ -84,7 +92,7 @@ const About = () => {
                   We believe powerful AI should be accessible to everyone, regardless of technical expertise.
                 </p>
               </div>
-              <div className="bg-white p-8 rounded-lg shadow-md">
+              <div className="bg-white p-8 rounded-lg shadow-md transform transition-all duration-500 hover:shadow-xl hover:-translate-y-1 opacity-0 translate-y-8 animate-fade-up animate-delay-300">
                 <div className="h-14 w-14 rounded-full bg-primary-blue/10 flex items-center justify-center mb-6">
                   <Clock className="h-7 w-7 text-primary-blue" />
                 </div>
@@ -100,12 +108,11 @@ const About = () => {
         {/* Team Section */}
         <section className="py-16 px-4 md:px-6 bg-white">
           <div className="container mx-auto">
-            <h2 className="text-3xl font-bold text-center text-gray-800 mb-4">Meet Our Team</h2>
+            <h2 className="text-3xl font-bold text-center text-gray-800 mb-4 font-heading">Meet Our Team</h2>
             <p className="text-lg text-center text-gray-600 mb-12 max-w-3xl mx-auto">
               Our diverse team combines expertise in AI research, software engineering, design, and business to create exceptional AI tools.
             </p>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {/* Team member cards would go here */}
               {[
                 {
                   name: "Sarah Johnson",
@@ -123,7 +130,11 @@ const About = () => {
                   image: "https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjN8fHByb2Zlc3Npb25hbCUyMHdvbWFufGVufDB8MHwwfHx8MA%3D%3D&auto=format&fit=crop&w=500&q=60"
                 }
               ].map((member, index) => (
-                <div key={index} className="bg-white rounded-lg overflow-hidden shadow-md">
+                <div 
+                  key={index} 
+                  className="bg-white rounded-lg overflow-hidden shadow-md transform transition-all duration-500 hover:shadow-xl hover:-translate-y-2 opacity-0 translate-y-8 animate-fade-up"
+                  style={{ animationDelay: `${index * 100}ms` }}
+                >
                   <img 
                     src={member.image} 
                     alt={member.name} 
@@ -140,15 +151,16 @@ const About = () => {
         </section>
 
         {/* CTA Section */}
-        <section className="py-16 px-4 md:px-6 bg-primary-blue text-white">
+        <section className="py-16 px-4 md:px-6 bg-gradient-to-r from-gray-900 to-gray-800 text-white">
           <div className="container mx-auto text-center">
-            <h2 className="text-3xl font-bold mb-6">Join Us on Our Mission</h2>
+            <h2 className="text-3xl font-bold mb-6 font-heading">Join Us on Our Mission</h2>
             <p className="text-xl max-w-3xl mx-auto mb-10">
               We're always looking for talented individuals who share our passion for AI and making technology accessible.
             </p>
             <div className="flex flex-col sm:flex-row justify-center gap-4">
-              <Button className="bg-white text-primary-blue hover:bg-white/90 text-lg px-8 py-6 font-medium">
-                View Open Positions
+              <Button className="bg-white text-primary-blue hover:bg-white/90 text-lg px-8 py-6 font-medium group">
+                <span>View Open Positions</span>
+                <span className="inline-block ml-2 transition-transform group-hover:translate-x-1">→</span>
               </Button>
               <Button variant="outline" className="bg-transparent border-white hover:bg-white/10 text-white text-lg px-8 py-6 font-medium">
                 Learn More

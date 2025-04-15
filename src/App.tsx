@@ -10,6 +10,7 @@ import Contact from "./pages/Contact";
 import Tools from "./pages/Tools";
 import ToolDetail from "./pages/ToolDetail";
 import NotFound from "./pages/NotFound";
+import NoiseRemoverTool from "./pages/NoiseRemoverTool";
 
 const queryClient = new QueryClient();
 
@@ -24,6 +25,7 @@ const App = () => (
         <Route path="/contact" element={<Contact />} />
         <Route path="/tools" element={<Tools />} />
         <Route path="/tools/:toolId" element={<ToolDetail />} />
+        <Route path="/tools/noise-remover" element={<NoiseRemoverTool />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </TooltipProvider>

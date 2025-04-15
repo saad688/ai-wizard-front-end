@@ -2,10 +2,17 @@
 import React, { useRef, useEffect } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, AudioWaveform } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 const tools = [
+  {
+    id: "noise-remover",
+    name: "Noise Remover",
+    description: "Remove unwanted noise from your audio with AI. Clean up recordings and enhance audio quality instantly.",
+    icon: "/images/ai-voice.svg",
+    color: "bg-cyan-50"
+  },
   {
     id: "image-enhancer",
     name: "Image Enhancer",
@@ -33,13 +40,6 @@ const tools = [
     description: "Generate, debug, and optimize code across multiple programming languages. Boost your productivity.",
     icon: "/images/ai-code.svg",
     color: "bg-teal-50"
-  },
-  {
-    id: "voice-transcriber",
-    name: "Voice Transcriber",
-    description: "Convert speech to text with high accuracy. Support for multiple languages and speaker identification.",
-    icon: "/images/ai-voice.svg",
-    color: "bg-rose-50"
   },
   {
     id: "ai-assistant",

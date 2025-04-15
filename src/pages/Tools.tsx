@@ -4,7 +4,7 @@ import Footer from '@/components/layout/Footer';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
-import { Search, Filter, Image, MessageSquare, LineChart, FileText, Code, Mic } from 'lucide-react';
+import { Search, Filter, Image, MessageSquare, LineChart, FileText, Code, Mic, AudioWaveform } from 'lucide-react';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 
@@ -21,6 +21,14 @@ const categories = [
 
 // Tool data
 const toolsData = [
+  {
+    id: "noise-remover",
+    name: "Noise Remover",
+    description: "Remove unwanted noise from your audio recordings with our AI-powered noise cancellation technology.",
+    category: "Voice & Audio",
+    icon: <AudioWaveform className="h-8 w-8" />,
+    popular: true
+  },
   {
     id: "image-enhancer",
     name: "Image Enhancer",

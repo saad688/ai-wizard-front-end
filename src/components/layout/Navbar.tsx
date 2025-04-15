@@ -23,6 +23,7 @@ const Navbar = () => {
   }, []);
 
   const tools = [
+    { name: 'Noise Remover', path: '/tools/noise-remover' },
     { name: 'Image Processing', path: '/tools/image-enhancer' },
     { name: 'Natural Language Processing', path: '/tools/text-analyzer' },
     { name: 'Data Analysis', path: '/tools/data-analysis' },

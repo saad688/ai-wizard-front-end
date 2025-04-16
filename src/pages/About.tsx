@@ -85,19 +85,67 @@ const About = () => {
                   allowing our users to harness the potential of artificial intelligence without needing a PhD in computer science.
                 </p>
               </motion.div>
+              
+              {/* Replace image with animated visual element */}
               <motion.div 
                 initial={{ opacity: 0, x: 30 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.7, delay: 0.2 }}
-                className="rounded-lg overflow-hidden shadow-xl transform transition-all duration-500 hover:scale-105 relative"
+                className="rounded-lg overflow-hidden shadow-xl relative h-[400px]"
               >
                 <div className="absolute inset-0 bg-gradient-to-br from-indigo-500/10 to-blue-500/10 z-10 rounded-lg"></div>
-                <img
-                  src="https://images.unsplash.com/photo-1553877522-43269d4ea984?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fHRlYW18ZW58MHwwfDB8fHww&auto=format&fit=crop&w=800&q=60"
-                  alt="Our team collaborating"
-                  className="w-full h-full object-cover"
-                />
+                <div className="absolute inset-0 bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:15px_15px] opacity-40"></div>
+                
+                {/* Animated elements */}
+                <div className="absolute inset-0 overflow-hidden">
+                  <motion.div 
+                    initial={{ x: -100, y: -100 }}
+                    animate={{ 
+                      x: [100, -100, 100], 
+                      y: [100, -100, 100] 
+                    }}
+                    transition={{ 
+                      duration: 20, 
+                      repeat: Infinity,
+                      ease: "easeInOut" 
+                    }}
+                    className="absolute w-80 h-80 rounded-full bg-indigo-400/20 blur-3xl"
+                  />
+                  <motion.div 
+                    initial={{ x: 200, y: 200 }}
+                    animate={{ 
+                      x: [0, 200, 0], 
+                      y: [0, 200, 0] 
+                    }}
+                    transition={{ 
+                      duration: 15, 
+                      repeat: Infinity,
+                      ease: "easeInOut" 
+                    }}
+                    className="absolute w-80 h-80 rounded-full bg-blue-400/20 blur-3xl"
+                  />
+                </div>
+                
+                {/* Content overlay */}
+                <div className="absolute inset-0 flex items-center justify-center z-20">
+                  <motion.div 
+                    initial={{ opacity: 0, scale: 0.8 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: 0.5, duration: 0.7 }}
+                    className="text-center px-8 py-10 bg-white/60 backdrop-blur-md rounded-xl shadow-lg max-w-sm"
+                  >
+                    <div className="mx-auto h-16 w-16 rounded-full bg-gradient-to-r from-indigo-600 to-blue-500 flex items-center justify-center mb-6">
+                      <Award className="h-8 w-8 text-white" />
+                    </div>
+                    <h3 className="text-xl font-bold text-gray-800 mb-3">Our Mission</h3>
+                    <div className="w-16 h-0.5 bg-gradient-to-r from-indigo-500 to-blue-500 mx-auto mb-4"></div>
+                    <p className="text-gray-700">
+                      To democratize artificial intelligence by creating powerful yet accessible tools that empower everyone to harness the potential of AI technology.
+                    </p>
+                  </motion.div>
+                </div>
               </motion.div>
             </div>
           </div>
@@ -167,7 +215,7 @@ const About = () => {
           </div>
         </section>
 
-        {/* Team Section */}
+        {/* Team Section - Replace team member images with animated cards */}
         <section className="py-16 px-4 md:px-6 bg-white relative overflow-hidden">
           <div className="absolute inset-0 -z-10 bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:20px_20px] opacity-30"></div>
           <div className="container mx-auto">
@@ -189,17 +237,17 @@ const About = () => {
                 {
                   name: "Sarah Johnson",
                   role: "CEO & AI Researcher",
-                  image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8cHJvZmVzc2lvbmFsJTIwd29tYW58ZW58MHwwfDB8fHww&auto=format&fit=crop&w=500&q=60"
+                  gradient: "from-purple-500/20 to-indigo-500/20"
                 },
                 {
                   name: "Michael Chen",
                   role: "CTO & Lead Engineer",
-                  image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80"
+                  gradient: "from-blue-500/20 to-cyan-500/20"
                 },
                 {
                   name: "Elena Rodriguez",
                   role: "Head of Product Design",
-                  image: "https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjN8fHByb2Zlc3Npb25hbCUyMHdvbWFufGVufDB8MHwwfHx8MA%3D%3D&auto=format&fit=crop&w=500&q=60"
+                  gradient: "from-indigo-500/20 to-blue-500/20"
                 }
               ].map((member, index) => (
                 <motion.div 
@@ -210,14 +258,47 @@ const About = () => {
                   transition={{ duration: 0.5, delay: index * 0.1 }}
                   className="bg-white rounded-xl overflow-hidden shadow-lg transform transition-all duration-500 hover:shadow-xl hover:-translate-y-2 group"
                 >
-                  <div className="relative overflow-hidden">
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10"></div>
-                    <img 
-                      src={member.image} 
-                      alt={member.name} 
-                      className="w-full h-64 object-cover object-center transition-transform duration-700 group-hover:scale-110"
-                    />
+                  {/* Replaced image with gradient animation */}
+                  <div className="relative h-64 overflow-hidden">
+                    <div className="absolute inset-0 bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:10px_10px] opacity-30"></div>
+                    <div className={`absolute inset-0 bg-gradient-to-br ${member.gradient}`}></div>
+                    
+                    {/* Animated particles */}
+                    <motion.div 
+                      initial={{ opacity: 0.2 }}
+                      animate={{ 
+                        opacity: [0.2, 0.6, 0.2],
+                      }}
+                      transition={{ 
+                        duration: 3, 
+                        repeat: Infinity,
+                        ease: "easeInOut" 
+                      }}
+                      className="absolute w-full h-full"
+                    >
+                      <div className="absolute top-1/4 left-1/4 w-16 h-16 rounded-full bg-white/30 blur-md"></div>
+                      <div className="absolute top-2/3 left-2/3 w-12 h-12 rounded-full bg-white/20 blur-md"></div>
+                      <div className="absolute top-2/3 left-1/4 w-8 h-8 rounded-full bg-white/20 blur-md"></div>
+                    </motion.div>
+                    
+                    <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-white to-transparent h-20 z-10"></div>
+                    
+                    {/* Profile icon */}
+                    <motion.div
+                      initial={{ y: 20, opacity: 0 }}
+                      whileInView={{ y: 0, opacity: 1 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: 0.3, duration: 0.5 }}
+                      className="absolute inset-0 flex items-center justify-center"
+                    >
+                      <div className="h-24 w-24 rounded-full bg-white/80 backdrop-blur-sm flex items-center justify-center shadow-lg">
+                        <div className="h-20 w-20 rounded-full bg-gradient-to-r from-indigo-600 to-blue-500 flex items-center justify-center">
+                          <Users className="h-10 w-10 text-white" />
+                        </div>
+                      </div>
+                    </motion.div>
                   </div>
+                  
                   <div className="p-6 relative">
                     <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-bl from-indigo-500/10 to-blue-500/10 rounded-full -mt-16 -mr-16"></div>
                     <h3 className="text-xl font-bold text-gray-800 relative z-10">{member.name}</h3>

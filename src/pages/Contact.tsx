@@ -4,7 +4,7 @@ import Footer from '@/components/layout/Footer';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { Map, Mail, Phone, MessageSquare, ArrowRight } from 'lucide-react';
+import { Mail, Phone, MessageSquare, ArrowRight } from 'lucide-react';
 import { useState } from 'react';
 import { useToast } from '@/hooks/use-toast';
 import BackgroundParticles from '@/components/tools/noise-remover/BackgroundParticles';
@@ -211,7 +211,7 @@ const Contact = () => {
                 </form>
               </motion.div>
 
-              {/* Map and Office Info */}
+              {/* Office Info - Replaced Map with Visual Element */}
               <motion.div 
                 initial={{ opacity: 0, x: 30 }}
                 whileInView={{ opacity: 1, x: 0 }}
@@ -222,11 +222,36 @@ const Contact = () => {
                 <div className="absolute -top-8 -right-8 w-32 h-32 bg-blue-100 rounded-full opacity-60 blur-xl"></div>
                 <h2 className="text-3xl font-bold text-gray-800 mb-6 font-heading relative z-10">Visit Our Office</h2>
                 <div className="w-20 h-1 bg-gradient-to-r from-indigo-500 to-blue-500 mb-8"></div>
-                <div className="bg-gray-100 rounded-xl h-64 mb-6 flex items-center justify-center overflow-hidden shadow-inner relative group">
-                  <div className="absolute inset-0 bg-gradient-to-br from-indigo-500/5 to-blue-500/5 z-10 group-hover:from-indigo-500/10 group-hover:to-blue-500/10 transition-colors duration-300"></div>
-                  <Map className="h-12 w-12 text-gray-400 relative z-20" />
-                  <span className="ml-2 text-gray-600 relative z-20">Interactive map would go here</span>
+                
+                {/* Replaced map with animated gradient visual */}
+                <div className="bg-gradient-to-br from-indigo-500/5 to-blue-500/10 rounded-xl h-64 mb-6 flex items-center justify-center overflow-hidden shadow-inner relative group">
+                  <div className="absolute inset-0 bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:15px_15px] opacity-50"></div>
+                  <div className="absolute w-full h-full flex items-center justify-center">
+                    <motion.div 
+                      initial={{ scale: 0.9, opacity: 0.5 }}
+                      animate={{ 
+                        scale: [0.9, 1.1, 0.9], 
+                        opacity: [0.5, 0.8, 0.5] 
+                      }}
+                      transition={{ 
+                        duration: 8, 
+                        repeat: Infinity,
+                        ease: "easeInOut" 
+                      }}
+                      className="w-40 h-40 rounded-full bg-gradient-to-r from-indigo-500/30 to-blue-400/30 blur-xl"
+                    />
+                  </div>
+                  <motion.div 
+                    initial={{ y: 10 }}
+                    animate={{ y: [-10, 10, -10] }}
+                    transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+                    className="relative z-10 text-center p-6 bg-white/50 backdrop-blur-md rounded-lg shadow-lg"
+                  >
+                    <h3 className="text-xl font-semibold text-gray-800 mb-2">AIMaster Headquarters</h3>
+                    <p className="text-gray-700">123 Tech Plaza, San Francisco, CA</p>
+                  </motion.div>
                 </div>
+                
                 <motion.div 
                   whileHover={{ y: -5 }}
                   transition={{ type: "spring", stiffness: 300 }}

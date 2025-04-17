@@ -62,22 +62,22 @@ const HeroSection = () => {
             </div>
           </div>
           
-          {/* Stats with animation */}
+          {/* Stats with animation - updated for startup phase */}
           <div ref={statsRef} className="mt-32 grid grid-cols-1 md:grid-cols-3 gap-12 border-t border-gray-200 pt-12 opacity-0">
             <div className="text-center relative animate-float">
               <div className="text-4xl font-light mb-2 text-gray-900 relative">
-                <span className="relative z-10">10,000+</span>
+                <span className="relative z-10">3+</span>
                 <span className="absolute -right-4 -top-4 w-12 h-12 bg-blue-100 rounded-full opacity-30"></span>
               </div>
-              <div className="text-gray-600">Problems Solved Daily</div>
+              <div className="text-gray-600">AI Tools & Growing</div>
             </div>
             <div className="text-center relative animate-float">
-              <div className="text-4xl font-light mb-2 text-gray-900">98%</div>
-              <div className="text-gray-600">Accuracy Rate</div>
+              <div className="text-4xl font-light mb-2 text-gray-900">100%</div>
+              <div className="text-gray-600">Free During Beta</div>
             </div>
             <div className="text-center relative animate-float">
               <div className="text-4xl font-light mb-2 text-gray-900">24/7</div>
-              <div className="text-gray-600">Global Availability</div>
+              <div className="text-gray-600">Development Ongoing</div>
             </div>
           </div>
         </div>

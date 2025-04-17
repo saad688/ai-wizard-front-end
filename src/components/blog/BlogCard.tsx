@@ -1,6 +1,6 @@
 
 import { Link } from 'react-router-dom';
-import { Calendar, Eye, MessageSquare, Tag } from 'lucide-react';
+import { Calendar, Eye, MessageSquare } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 export interface BlogPost {
@@ -8,7 +8,6 @@ export interface BlogPost {
   title: string;
   excerpt: string;
   content: string;
-  coverImage: string;
   category: string;
   tags: string[];
   author: {
@@ -27,6 +26,16 @@ interface BlogCardProps {
 }
 
 const BlogCard = ({ post, index }: BlogCardProps) => {
+  // Generate a gradient based on the post ID for variety
+  const gradientIndex = parseInt(post.id) % 5;
+  const gradients = [
+    'from-indigo-500 to-blue-500',
+    'from-blue-500 to-cyan-500',
+    'from-purple-500 to-indigo-500',
+    'from-cyan-500 to-blue-500',
+    'from-blue-600 to-indigo-600'
+  ];
+  
   return (
     <motion.div
       initial={{ opacity: 0, y: 30 }}
@@ -36,15 +45,25 @@ const BlogCard = ({ post, index }: BlogCardProps) => {
       className="bg-white rounded-xl overflow-hidden shadow-soft border border-gray-100 hover:shadow-lg transition-all duration-300 hover:-translate-y-1 group"
     >
       <Link to={`/blog/${post.id}`} className="block">
-        <div className="relative h-48 overflow-hidden">
-          <img 
-            src={post.coverImage} 
-            alt={post.title} 
-            className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-gray-900/60 to-transparent opacity-70"></div>
+        <div className="h-48 overflow-hidden relative">
+          {/* Designed thumbnail instead of an image */}
+          <div className={`w-full h-full bg-gradient-to-br ${gradients[gradientIndex]} flex items-center justify-center p-6`}>
+            <div className="absolute inset-0 opacity-10">
+              <svg width="100%" height="100%" viewBox="0 0 100 100" preserveAspectRatio="none">
+                <defs>
+                  <pattern id={`pattern-${post.id}`} width="10" height="10" patternUnits="userSpaceOnUse">
+                    <path d="M 10 0 L 0 0 0 10" fill="none" stroke="rgba(255, 255, 255, 0.2)" strokeWidth="0.5" />
+                  </pattern>
+                </defs>
+                <rect width="100%" height="100%" fill={`url(#pattern-${post.id})`} />
+              </svg>
+            </div>
+            <h3 className="text-xl sm:text-2xl font-bold text-white text-center leading-tight z-10">
+              {post.title}
+            </h3>
+          </div>
           <div className="absolute bottom-4 left-4 z-10">
-            <span className="px-3 py-1 bg-indigo-600 text-white text-sm font-medium rounded-full">
+            <span className="px-3 py-1 bg-white text-indigo-600 text-sm font-medium rounded-full shadow-sm">
               {post.category}
             </span>
           </div>
@@ -65,10 +84,6 @@ const BlogCard = ({ post, index }: BlogCardProps) => {
               <span>{post.viewCount}</span>
             </div>
           </div>
-          
-          <h3 className="text-xl font-bold text-gray-800 mb-3 group-hover:text-indigo-600 transition-colors">
-            {post.title}
-          </h3>
           
           <p className="text-gray-600 mb-4 line-clamp-2">
             {post.excerpt}

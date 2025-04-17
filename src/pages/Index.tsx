@@ -17,7 +17,6 @@ const sampleBlogPosts: BlogPost[] = [
     title: 'Introduction to AI: Understanding the Basics',
     excerpt: 'Learn the fundamental concepts of artificial intelligence and how it is transforming industries worldwide.',
     content: 'Full content here...',
-    coverImage: 'https://images.unsplash.com/photo-1677442135068-17b1c5c298cb?q=80&w=500',
     category: 'AI Basics',
     tags: ['AI', 'Machine Learning', 'Beginners'],
     author: {
@@ -34,7 +33,6 @@ const sampleBlogPosts: BlogPost[] = [
     title: 'Optimizing Image Processing with Our AI Tools',
     excerpt: 'Discover how our suite of AI-powered image processing tools can transform your workflow and save time.',
     content: 'Full content here...',
-    coverImage: 'https://images.unsplash.com/photo-1579403124614-197f69d8187b?q=80&w=500',
     category: 'Tutorials',
     tags: ['Image Processing', 'Optimization', 'Workflow'],
     author: {
@@ -51,7 +49,6 @@ const sampleBlogPosts: BlogPost[] = [
     title: 'The Future of Text Generation: GPT Models Explained',
     excerpt: 'An in-depth look at how GPT models work and what the future might hold for text generation technology.',
     content: 'Full content here...',
-    coverImage: 'https://images.unsplash.com/photo-1620712943543-bcc4688e7485?q=80&w=500',
     category: 'Research',
     tags: ['GPT', 'NLP', 'Text Generation'],
     author: {

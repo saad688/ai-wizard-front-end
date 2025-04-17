@@ -15,7 +15,7 @@ const sampleBlogPosts: BlogPost[] = [
   {
     id: '1',
     title: 'Introduction to AI: Understanding the Basics',
-    excerpt: 'Learn the fundamental concepts of artificial intelligence and how it's transforming industries worldwide.',
+    excerpt: 'Learn the fundamental concepts of artificial intelligence and how it\'s transforming industries worldwide.',
     content: 'Full content here...',
     coverImage: 'https://images.unsplash.com/photo-1677442135068-17b1c5c298cb?q=80&w=500',
     category: 'AI Basics',

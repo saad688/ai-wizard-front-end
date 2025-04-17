@@ -104,14 +104,14 @@ const values = [
   },
   {
     title: 'Transparency',
-    description: 'We're committed to being open about our technology, its capabilities, and its limitations.',
+    description: 'We\'re committed to being open about our technology, its capabilities, and its limitations.',
     icon: Code,
     color: 'bg-gradient-to-r from-purple-500 to-purple-600',
     delay: 0.3
   },
   {
     title: 'Quality',
-    description: 'We maintain high standards in our tools' performance, reliability, and user experience.',
+    description: 'We maintain high standards in our tools\' performance, reliability, and user experience.',
     icon: Award,
     color: 'bg-gradient-to-r from-pink-500 to-pink-600',
     delay: 0.4
@@ -162,7 +162,7 @@ const About = () => {
                 transition={{ duration: 0.7, delay: 0.1 }}
                 className="text-xl text-gray-600 max-w-3xl mx-auto"
               >
-                We're building accessible AI tools that empower people to solve complex problems and enhance their creativity
+                We\'re building accessible AI tools that empower people to solve complex problems and enhance their creativity
               </motion.p>
               <div className="w-24 h-1 bg-gradient-to-r from-blue-500 to-indigo-600 mx-auto mt-8"></div>
             </div>

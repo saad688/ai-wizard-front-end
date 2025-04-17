@@ -7,11 +7,11 @@ import { Routes, Route } from "react-router-dom";
 import { useState } from 'react';
 import Index from "./pages/Index";
 import About from "./pages/About";
-import Contact from "./pages/Contact";
 import Tools from "./pages/Tools";
 import ToolDetail from "./pages/ToolDetail";
 import NotFound from "./pages/NotFound";
 import NoiseRemoverTool from "./pages/NoiseRemoverTool";
+import Blog from "./pages/Blog";
 
 // Create the App component as a function component
 const App = () => {
@@ -26,10 +26,10 @@ const App = () => {
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/about" element={<About />} />
-          <Route path="/contact" element={<Contact />} />
           <Route path="/tools" element={<Tools />} />
           <Route path="/tools/:toolId" element={<ToolDetail />} />
           <Route path="/tools/noise-remover" element={<NoiseRemoverTool />} />
+          <Route path="/blog" element={<Blog />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </TooltipProvider>

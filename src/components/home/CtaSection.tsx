@@ -1,7 +1,8 @@
 
 import { Button } from '@/components/ui/button';
-import { ArrowRight, Mail, Calendar } from 'lucide-react';
+import { ArrowRight, Calendar } from 'lucide-react';
 import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
 
 const CtaSection = () => {
   return (
@@ -58,10 +59,10 @@ const CtaSection = () => {
           className="max-w-4xl mx-auto text-center"
         >
           <h2 className="text-3xl md:text-5xl font-heading font-light mb-6 text-white">
-            Ready to <span className="font-medium">Transform Your Workflow</span>?
+            Start Your <span className="font-medium">AI Journey</span> Today
           </h2>
           <p className="text-xl text-white/90 max-w-3xl mx-auto mb-12 leading-relaxed">
-            Join thousands of professionals using our AI tools to save time, reduce costs, and achieve better results.
+            Explore our free AI tools and be part of our growing community. We're just getting started and excited to have you join us.
           </p>
           
           {/* Glowing line divider */}
@@ -74,16 +75,20 @@ const CtaSection = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.7, delay: 0.3 }}
           >
-            <Button className="bg-white text-gray-900 hover:bg-white/90 text-lg px-8 py-6 font-medium rounded-md shadow-xl hover:shadow-2xl transition-all group relative overflow-hidden">
-              <span className="relative z-10 flex items-center">
-                Get Started For Free
-                <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
-              </span>
-              <span className="absolute inset-0 bg-gradient-to-r from-white/80 to-white transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left"></span>
+            <Button asChild className="bg-white text-gray-900 hover:bg-white/90 text-lg px-8 py-6 font-medium rounded-md shadow-xl hover:shadow-2xl transition-all group relative overflow-hidden">
+              <Link to="/tools">
+                <span className="relative z-10 flex items-center">
+                  Try Our Tools
+                  <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
+                </span>
+                <span className="absolute inset-0 bg-gradient-to-r from-white/80 to-white transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left"></span>
+              </Link>
             </Button>
-            <Button variant="outline" className="bg-transparent border-2 border-white hover:bg-white/10 text-white text-lg px-8 py-6 font-medium rounded-md shadow-lg hover:shadow-xl transition-all group">
-              <Calendar className="mr-2 h-5 w-5 transition-transform group-hover:scale-110" />
-              <span>Schedule a Demo</span>
+            <Button asChild variant="outline" className="bg-transparent border-2 border-white hover:bg-white/10 text-white text-lg px-8 py-6 font-medium rounded-md shadow-lg hover:shadow-xl transition-all group">
+              <Link to="/about">
+                <Calendar className="mr-2 h-5 w-5 transition-transform group-hover:scale-110" />
+                <span>Learn More</span>
+              </Link>
             </Button>
           </motion.div>
           
@@ -103,7 +108,7 @@ const CtaSection = () => {
               transition={{ duration: 0.5, delay: 0.7 }}
             >
               <div className="w-1.5 h-1.5 rounded-full bg-blue-400 mr-2"></div>
-              <span>No credit card required</span>
+              <span>Free to use</span>
             </motion.div>
             <motion.div 
               className="flex items-center"
@@ -113,7 +118,7 @@ const CtaSection = () => {
               transition={{ duration: 0.5, delay: 0.8 }}
             >
               <div className="w-1.5 h-1.5 rounded-full bg-indigo-400 mr-2"></div>
-              <span>14-day free trial</span>
+              <span>No registration required</span>
             </motion.div>
             <motion.div 
               className="flex items-center"
@@ -123,7 +128,7 @@ const CtaSection = () => {
               transition={{ duration: 0.5, delay: 0.9 }}
             >
               <div className="w-1.5 h-1.5 rounded-full bg-purple-400 mr-2"></div>
-              <span>Cancel anytime</span>
+              <span>Constantly improving</span>
             </motion.div>
           </motion.div>
         </motion.div>

@@ -2,6 +2,7 @@
 import { Button } from '@/components/ui/button';
 import { ArrowRight } from 'lucide-react';
 import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
 
 const steps = [
   {
@@ -89,10 +90,10 @@ const HowItWorks = () => {
                 viewport={{ once: true }}
                 transition={{ duration: 0.7, delay: index * 0.2 }}
               >
-                {/* Step number with glowing effect */}
+                {/* Step number with glowing effect - darker text */}
                 <div className="mb-8">
                   <div className="relative">
-                    <span className="text-8xl font-bold text-gray-100">{step.number}</span>
+                    <span className="text-8xl font-bold text-gray-300">{step.number}</span>
                     <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-16 h-16 bg-blue-500 bg-opacity-10 rounded-full animate-pulse-subtle"></div>
                     <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-12 h-12 bg-indigo-500 bg-opacity-10 rounded-full animate-pulse-subtle" style={{ animationDelay: '1s' }}></div>
                   </div>
@@ -123,10 +124,12 @@ const HowItWorks = () => {
           viewport={{ once: true }}
           transition={{ duration: 0.7, delay: 0.8 }}
         >
-          <Button className="bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white text-lg px-8 py-6 rounded-md shadow-md hover:shadow-lg transition-all group relative overflow-hidden">
-            <span className="relative z-10">Get Started Now</span>
-            <span className="absolute inset-0 bg-gradient-to-r from-indigo-600 to-blue-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
-            <ArrowRight className="ml-2 h-5 w-5 relative z-10 transition-transform group-hover:translate-x-1" />
+          <Button asChild className="bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white text-lg px-8 py-6 rounded-md shadow-md hover:shadow-lg transition-all group relative overflow-hidden">
+            <Link to="/tools">
+              <span className="relative z-10">Get Started Now</span>
+              <span className="absolute inset-0 bg-gradient-to-r from-indigo-600 to-blue-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
+              <ArrowRight className="ml-2 h-5 w-5 relative z-10 transition-transform group-hover:translate-x-1" />
+            </Link>
           </Button>
           
           {/* Decorative elements */}

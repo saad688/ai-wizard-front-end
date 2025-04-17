@@ -3,6 +3,7 @@ import { Button } from '@/components/ui/button';
 import { ArrowRight } from 'lucide-react';
 import AnimatedBackground from './AnimatedBackground';
 import { useEffect, useRef } from 'react';
+import { Link } from 'react-router-dom';
 
 const HeroSection = () => {
   const statsRef = useRef<HTMLDivElement>(null);
@@ -50,14 +51,18 @@ const HeroSection = () => {
               Solve complex problems with cutting-edge AI technology designed for simplicity and performance.
             </p>
             <div className="flex flex-col sm:flex-row justify-center gap-6 pt-6 animate-fade-up-slower">
-              <Button className="button-primary text-lg group relative overflow-hidden">
-                <span className="relative z-10">Explore Tools</span>
-                <span className="absolute inset-0 bg-gradient-to-r from-blue-600 to-blue-800 transform translate-x-[-100%] group-hover:translate-x-0 transition-transform duration-300"></span>
-                <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1 relative z-10" />
+              <Button asChild className="button-primary text-lg group relative overflow-hidden">
+                <Link to="/tools">
+                  <span className="relative z-10">Explore Tools</span>
+                  <span className="absolute inset-0 bg-gradient-to-r from-blue-600 to-blue-800 transform translate-x-[-100%] group-hover:translate-x-0 transition-transform duration-300"></span>
+                  <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1 relative z-10" />
+                </Link>
               </Button>
-              <Button variant="outline" className="border-gray-900 text-gray-900 hover:bg-gray-50 rounded-none py-3 px-6 text-lg relative overflow-hidden group">
-                <span className="relative z-10">Learn More</span>
-                <span className="absolute inset-0 bg-gray-100 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></span>
+              <Button asChild variant="outline" className="border-gray-900 text-gray-900 hover:bg-gray-50 rounded-none py-3 px-6 text-lg relative overflow-hidden group">
+                <Link to="/about">
+                  <span className="relative z-10">Learn More</span>
+                  <span className="absolute inset-0 bg-gray-100 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></span>
+                </Link>
               </Button>
             </div>
           </div>
@@ -66,13 +71,13 @@ const HeroSection = () => {
           <div ref={statsRef} className="mt-32 grid grid-cols-1 md:grid-cols-3 gap-12 border-t border-gray-200 pt-12 opacity-0">
             <div className="text-center relative animate-float">
               <div className="text-4xl font-light mb-2 text-gray-900 relative">
-                <span className="relative z-10">10,000+</span>
+                <span className="relative z-10">5+</span>
                 <span className="absolute -right-4 -top-4 w-12 h-12 bg-blue-100 rounded-full opacity-30"></span>
               </div>
-              <div className="text-gray-600">Problems Solved Daily</div>
+              <div className="text-gray-600">AI-Powered Tools</div>
             </div>
             <div className="text-center relative animate-float">
-              <div className="text-4xl font-light mb-2 text-gray-900">98%</div>
+              <div className="text-4xl font-light mb-2 text-gray-900">95%</div>
               <div className="text-gray-600">Accuracy Rate</div>
             </div>
             <div className="text-center relative animate-float">

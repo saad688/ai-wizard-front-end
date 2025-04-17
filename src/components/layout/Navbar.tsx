@@ -72,14 +72,14 @@ const Navbar = () => {
                 </div>
               )}
             </div>
+            <NavLink to="/blog" active={location.pathname === '/blog'}>Blog</NavLink>
             <NavLink to="/about" active={location.pathname === '/about'}>About</NavLink>
-            <NavLink to="/contact" active={location.pathname === '/contact'}>Contact</NavLink>
           </div>
 
           {/* CTA */}
           <div className="hidden md:block">
-            <Button className="button-primary">
-              Get Started
+            <Button asChild className="button-primary">
+              <Link to="/tools">Get Started</Link>
             </Button>
           </div>
 
@@ -117,11 +117,11 @@ const Navbar = () => {
                   ))}
                 </div>
               )}
+              <MobileNavLink to="/blog" active={location.pathname === '/blog'}>Blog</MobileNavLink>
               <MobileNavLink to="/about" active={location.pathname === '/about'}>About</MobileNavLink>
-              <MobileNavLink to="/contact" active={location.pathname === '/contact'}>Contact</MobileNavLink>
               
-              <Button className="button-primary w-full mt-8">
-                Get Started
+              <Button asChild className="button-primary w-full mt-8">
+                <Link to="/tools">Get Started</Link>
               </Button>
             </div>
           </div>

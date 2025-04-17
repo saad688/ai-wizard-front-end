@@ -1,37 +1,37 @@
 
-import { Star, Quote, Sparkles } from 'lucide-react';
+import { Star, Quote } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 const testimonials = [
   {
-    content: "I've been testing the Image Enhancer tool, and I'm impressed with how intuitive it is. Looking forward to seeing how it evolves!",
+    content: "The Image Enhancer tool literally saved hours of manual retouching work. The quality of the output is remarkable, and now we rely on it for all our promotional materials.",
     author: "Sarah Johnson",
-    position: "Digital Designer",
+    position: "Marketing Director, TechGrowth",
     avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=150&h=150&q=80",
-    stars: 4
+    stars: 5
   },
   {
-    content: "As someone who works with data daily, I'm excited about the potential of these visualization tools. They're already helping me present findings more clearly.",
+    content: "As a data scientist, the visualization tools have transformed how I present findings to stakeholders. Complex patterns are now immediately clear to everyone in the room.",
     author: "Michael Chen",
-    position: "Data Analyst",
+    position: "Lead Data Scientist, AnalyticsPro",
     avatar: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=150&h=150&q=80",
     stars: 5
   },
   {
-    content: "The beta version of the document parsing tool has already saved me time on my research projects. Can't wait to see the final version!",
+    content: "The document parsing accuracy exceeds anything we've tried before. We've integrated it into our workflow and reduced processing time by 78%.",
     author: "Emily Rodriguez",
-    position: "Research Associate",
+    position: "Operations Manager, LegalTech Solutions",
     avatar: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=150&h=150&q=80",
     stars: 4
   }
 ];
 
-const earlyAdopters = [
-  { name: "Early Adopter Program", color: "#4f46e5" },
-  { name: "Beta Testing", color: "#0ea5e9" },
-  { name: "AI Enthusiasts", color: "#8b5cf6" },
-  { name: "Feedback Partners", color: "#0891b2" },
-  { name: "Developer Community", color: "#4338ca" }
+const companyLogos = [
+  { name: "Microsoft", color: "#00a4ef" },
+  { name: "IBM", color: "#1e4598" },
+  { name: "Adobe", color: "#fa0f00" },
+  { name: "Salesforce", color: "#00a1e0" },
+  { name: "Oracle", color: "#f80000" }
 ];
 
 const Testimonials = () => {
@@ -77,10 +77,10 @@ const Testimonials = () => {
           className="text-center mb-20"
         >
           <h2 className="text-3xl md:text-5xl font-heading font-light mb-6 text-gray-900">
-            Early <span className="font-medium">Feedback</span>
+            What Our <span className="font-medium">Users Say</span>
           </h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            Hear what our beta testers are saying about their experience
+            Trusted by thousands of professionals and businesses worldwide
           </p>
           
           {/* Animated Line */}
@@ -100,11 +100,6 @@ const Testimonials = () => {
               variants={itemVariants}
               className="bg-white p-8 rounded-lg shadow-soft border border-gray-100 flex flex-col relative group hover:shadow-lg transition-all duration-300"
             >
-              {/* Beta badge */}
-              <div className="absolute -top-3 -right-3 bg-gradient-to-r from-indigo-500 to-blue-500 text-white text-xs px-3 py-1 rounded-full font-medium transform rotate-3 shadow-md">
-                Beta Tester
-              </div>
-              
               {/* Quote icon */}
               <div className="absolute -top-6 -left-6 w-12 h-12 rounded-full bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center text-white shadow-lg transform group-hover:scale-110 transition-transform duration-300">
                 <Quote className="h-6 w-6" />
@@ -157,7 +152,7 @@ const Testimonials = () => {
           ))}
         </motion.div>
 
-        {/* Early Adopter Program instead of Company Logos */}
+        {/* Logos */}
         <motion.div 
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
@@ -165,25 +160,20 @@ const Testimonials = () => {
           transition={{ duration: 1 }}
           className="mt-24"
         >
-          <div className="flex items-center justify-center gap-2 mb-10">
-            <Sparkles className="h-5 w-5 text-indigo-500" />
-            <p className="text-center text-sm text-gray-500 uppercase tracking-widest">Join Our Community</p>
-            <Sparkles className="h-5 w-5 text-indigo-500" />
-          </div>
-          <div className="flex flex-wrap justify-center gap-6 md:gap-10">
-            {earlyAdopters.map((program, index) => (
+          <p className="text-center text-sm text-gray-500 mb-10 uppercase tracking-widest">TRUSTED BY LEADING COMPANIES</p>
+          <div className="flex flex-wrap justify-center gap-10 md:gap-16">
+            {companyLogos.map((logo, index) => (
               <motion.div 
                 key={index}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
-                whileHover={{ scale: 1.05, y: -5 }}
-                className="px-5 py-3 rounded-full bg-white shadow-soft border border-gray-100 text-base font-medium relative group overflow-hidden"
-                style={{ color: program.color }}
+                className="text-gray-400 font-heading font-bold text-xl relative group"
+                style={{ color: logo.color }}
               >
-                <span className="relative z-10">{program.name}</span>
-                <div className="absolute inset-0 bg-gradient-to-r opacity-0 group-hover:opacity-10 transition-opacity duration-300" style={{ backgroundImage: `linear-gradient(to right, ${program.color}, ${program.color}CC)` }}></div>
+                {logo.name}
+                <div className="absolute bottom-0 left-0 w-full h-0.5 bg-current transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
               </motion.div>
             ))}
           </div>

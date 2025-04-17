@@ -89,10 +89,10 @@ const HowItWorks = () => {
                 viewport={{ once: true }}
                 transition={{ duration: 0.7, delay: index * 0.2 }}
               >
-                {/* Step number with glowing effect - DARKENED */}
+                {/* Step number with glowing effect */}
                 <div className="mb-8">
                   <div className="relative">
-                    <span className="text-8xl font-bold text-gray-600">{step.number}</span>
+                    <span className="text-8xl font-bold text-gray-100">{step.number}</span>
                     <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-16 h-16 bg-blue-500 bg-opacity-10 rounded-full animate-pulse-subtle"></div>
                     <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-12 h-12 bg-indigo-500 bg-opacity-10 rounded-full animate-pulse-subtle" style={{ animationDelay: '1s' }}></div>
                   </div>

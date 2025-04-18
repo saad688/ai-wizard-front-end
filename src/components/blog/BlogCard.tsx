@@ -18,6 +18,7 @@ export interface BlogPost {
   readTime: string;
   commentCount: number;
   viewCount: number;
+  coverImage?: string;
 }
 
 interface BlogCardProps {

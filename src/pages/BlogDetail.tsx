@@ -1,16 +1,14 @@
-
 import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import Navbar from '@/components/layout/Navbar';
 import Footer from '@/components/layout/Footer';
 import { BlogPost } from '@/components/blog/BlogCard';
-import { User, Calendar, Clock, Tag, Share2, ThumbsUp, MessageSquare, Bookmark, Eye } from 'lucide-react';
+import { User, Calendar, Clock, Tag, Share2, ThumbsUp, MessageSquare, Bookmark, Eye, Code, FileCode, Quote, AlertCircle, Image } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent } from '@/components/ui/card';
 import { motion } from 'framer-motion';
 
-// Sample blog post data - in a real app this would come from an API
 const sampleBlogPosts: BlogPost[] = [
   {
     id: '1',
@@ -81,7 +79,6 @@ Our AI tools suite is designed to grow with you, from simple beginnings to advan
     commentCount: 12,
     viewCount: 324,
   },
-  // ... other blog posts
 ];
 
 const BlogDetail = () => {
@@ -90,7 +87,6 @@ const BlogDetail = () => {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    // Simulate fetching data
     setIsLoading(true);
     setTimeout(() => {
       const foundPost = sampleBlogPosts.find(p => p.id === blogId);
@@ -99,20 +95,66 @@ const BlogDetail = () => {
     }, 500);
   }, [blogId]);
 
-  // Function to convert markdown headings to HTML with classes
   const formatContent = (content: string) => {
-    // Replace markdown headings with styled HTML
     let formatted = content
       .replace(/^# (.*$)/gm, '<h1 class="text-3xl md:text-4xl font-bold mt-10 mb-6">$1</h1>')
       .replace(/^## (.*$)/gm, '<h2 class="text-2xl md:text-3xl font-semibold mt-8 mb-4">$1</h2>')
       .replace(/^### (.*$)/gm, '<h3 class="text-xl md:text-2xl font-semibold mt-6 mb-3">$1</h3>')
-      .replace(/^\- (.*$)/gm, '<li class="ml-6 list-disc my-1">$1</li>')
+      .replace(/^- (.*$)/gm, '<li class="ml-6 list-disc my-1">$1</li>')
       .replace(/^(\d+)\. (.*$)/gm, '<li class="ml-6 list-decimal my-2">$1. $2</li>');
-    
-    // Convert paragraphs (lines that aren't headings or list items)
+
+    formatted = formatted.replace(/```([a-z]*)\n([\s\S]*?)```/gm, (match, language, code) => `
+      <div class="relative my-6 rounded-lg overflow-hidden">
+        <div class="flex items-center justify-between bg-gray-800 dark:bg-gray-900 px-4 py-2">
+          <div class="flex items-center gap-2">
+            <Code class="w-4 h-4 text-gray-400" />
+            <span class="text-sm text-gray-400">${language || 'code'}</span>
+          </div>
+        </div>
+        <pre class="bg-gray-900 dark:bg-gray-950 p-4 overflow-x-auto">
+          <code class="text-sm text-gray-200">${code.trim()}</code>
+        </pre>
+      </div>
+    `);
+
+    formatted = formatted.replace(/^> (.*$)/gm, (match, quote) => `
+      <blockquote class="my-6 border-l-4 border-indigo-500 pl-4 italic">
+        <div class="flex items-start gap-3">
+          <Quote class="w-5 h-5 text-indigo-500 mt-1" />
+          <p class="text-gray-700 dark:text-gray-300">${quote}</p>
+        </div>
+      </blockquote>
+    `);
+
+    formatted = formatted.replace(/!note\[([\s\S]*?)\]/gm, (match, content) => `
+      <div class="my-6 bg-blue-50 dark:bg-blue-950 border-l-4 border-blue-500 p-4 rounded-r-lg">
+        <div class="flex items-start gap-3">
+          <AlertCircle class="w-5 h-5 text-blue-500 mt-1" />
+          <div>
+            <h4 class="font-semibold text-blue-700 dark:text-blue-300 mb-2">Note</h4>
+            <p class="text-blue-700 dark:text-blue-300">${content}</p>
+          </div>
+        </div>
+      </div>
+    `);
+
+    formatted = formatted.replace(/!figure\[(.*?)\]\((.*?)\)\[(.*?)\]/gm, (match, alt, src, caption) => `
+      <figure class="my-8">
+        <div class="rounded-lg overflow-hidden bg-gray-100 dark:bg-gray-800">
+          <img src="${src}" alt="${alt}" class="w-full h-auto" />
+        </div>
+        <figcaption class="mt-3 text-sm text-center text-gray-600 dark:text-gray-400">
+          <div class="flex items-center justify-center gap-2">
+            <Image class="w-4 h-4" />
+            <span>${caption}</span>
+          </div>
+        </figcaption>
+      </figure>
+    `);
+
     const paragraphs = formatted.split('\n\n');
     formatted = paragraphs.map(p => {
-      if (!p.startsWith('<h') && !p.startsWith('<li') && p.trim().length > 0) {
+      if (!p.startsWith('<') && p.trim().length > 0) {
         return `<p class="my-4 text-gray-700 dark:text-gray-300 leading-relaxed">${p}</p>`;
       }
       return p;
@@ -163,7 +205,6 @@ const BlogDetail = () => {
     <div className="min-h-screen flex flex-col">
       <Navbar />
       <main className="flex-grow">
-        {/* Hero Section */}
         <section className="w-full bg-gradient-to-b from-indigo-50 to-white dark:from-gray-900 dark:to-gray-800 pt-20 pb-10">
           <div className="container mx-auto px-4">
             <motion.div
@@ -196,11 +237,9 @@ const BlogDetail = () => {
           </div>
         </section>
 
-        {/* Content */}
         <section className="py-12">
           <div className="container mx-auto px-4">
             <div className="flex flex-col lg:flex-row gap-10">
-              {/* Main Content */}
               <motion.div 
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
@@ -266,7 +305,6 @@ const BlogDetail = () => {
                     </div>
                   </div>
 
-                  {/* Comments Section - Simplified */}
                   <div className="mt-10">
                     <h3 className="text-2xl font-bold mb-6">Comments</h3>
                     <Card className="mb-6">
@@ -313,14 +351,12 @@ const BlogDetail = () => {
                 </div>
               </motion.div>
 
-              {/* Sidebar */}
               <motion.div 
                 initial={{ opacity: 0, x: 50 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.7, delay: 0.4 }}
                 className="lg:w-1/4"
               >
-                {/* Author Card */}
                 <Card className="mb-8">
                   <CardContent className="pt-6">
                     <div className="text-center">
@@ -338,7 +374,6 @@ const BlogDetail = () => {
                   </CardContent>
                 </Card>
 
-                {/* Related Topics */}
                 <Card className="mb-8">
                   <CardContent className="pt-6">
                     <h3 className="font-bold text-lg mb-4">Related Topics</h3>
@@ -352,7 +387,6 @@ const BlogDetail = () => {
                   </CardContent>
                 </Card>
 
-                {/* Popular Articles */}
                 <Card>
                   <CardContent className="pt-6">
                     <h3 className="font-bold text-lg mb-4">Popular Articles</h3>

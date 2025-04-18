@@ -1,9 +1,10 @@
+
 import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import Navbar from '@/components/layout/Navbar';
 import Footer from '@/components/layout/Footer';
 import { BlogPost } from '@/components/blog/BlogCard';
-import { User, Calendar, Clock, Tag, Share2, ThumbsUp, MessageSquare, Bookmark } from 'lucide-react';
+import { User, Calendar, Clock, Tag, Share2, ThumbsUp, MessageSquare, Bookmark, Eye } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent } from '@/components/ui/card';
@@ -359,7 +360,7 @@ const BlogDetail = () => {
                       {[
                         'How to Use AI for Content Creation',
                         'The Future of AI Tools in 2025',
-                        'Beginner's Guide to Machine Learning',
+                        'Beginner\'s Guide to Machine Learning',
                         'Top 10 AI Tools for Designers'
                       ].map((title, index) => (
                         <div key={index} className="border-b border-gray-100 dark:border-gray-700 pb-3 last:border-0">

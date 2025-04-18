@@ -1,6 +1,6 @@
 
 import { Link } from 'react-router-dom';
-import { Calendar, Eye, MessageSquare, Tag } from 'lucide-react';
+import { Calendar, Eye, MessageSquare } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 export interface BlogPost {
@@ -8,7 +8,6 @@ export interface BlogPost {
   title: string;
   excerpt: string;
   content: string;
-  coverImage: string;
   category: string;
   tags: string[];
   author: {
@@ -33,57 +32,44 @@ const BlogCard = ({ post, index }: BlogCardProps) => {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.5, delay: index * 0.1 }}
-      className="bg-white rounded-xl overflow-hidden shadow-soft border border-gray-100 hover:shadow-lg transition-all duration-300 hover:-translate-y-1 group"
+      className="bg-gradient-to-br from-gray-50 to-white dark:from-gray-900 dark:to-gray-800 rounded-xl overflow-hidden shadow-soft border border-gray-100 dark:border-gray-700 hover:shadow-lg transition-all duration-300 hover:-translate-y-1 group"
     >
       <Link to={`/blog/${post.id}`} className="block">
-        <div className="relative h-48 overflow-hidden">
-          <img 
-            src={post.coverImage} 
-            alt={post.title} 
-            className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-gray-900/60 to-transparent opacity-70"></div>
-          <div className="absolute bottom-4 left-4 z-10">
+        <div className="p-6">
+          <div className="absolute top-3 right-3">
             <span className="px-3 py-1 bg-indigo-600 text-white text-sm font-medium rounded-full">
               {post.category}
             </span>
           </div>
-        </div>
-        
-        <div className="p-6">
-          <div className="flex items-center mb-3 text-sm text-gray-500">
-            <div className="flex items-center mr-4">
-              <Calendar className="h-4 w-4 mr-1" />
-              <span>{post.publishedAt}</span>
-            </div>
-            <div className="flex items-center mr-4">
-              <MessageSquare className="h-4 w-4 mr-1" />
-              <span>{post.commentCount}</span>
-            </div>
-            <div className="flex items-center">
-              <Eye className="h-4 w-4 mr-1" />
-              <span>{post.viewCount}</span>
+          
+          <div className="relative h-48 mb-6 bg-gradient-to-br from-indigo-100 to-blue-50 dark:from-indigo-900/30 dark:to-blue-900/30 rounded-lg overflow-hidden group-hover:shadow-inner transition-all duration-300">
+            <div className="absolute inset-0 flex items-center justify-center">
+              <h3 className="text-2xl font-bold text-gray-800 dark:text-gray-100 p-6 text-center group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors">
+                {post.title}
+              </h3>
             </div>
           </div>
           
-          <h3 className="text-xl font-bold text-gray-800 mb-3 group-hover:text-indigo-600 transition-colors">
-            {post.title}
-          </h3>
-          
-          <p className="text-gray-600 mb-4 line-clamp-2">
+          <p className="text-gray-600 dark:text-gray-300 mb-4 line-clamp-2">
             {post.excerpt}
           </p>
           
           <div className="flex items-center justify-between">
-            <div className="flex items-center">
-              <img 
-                src={post.author.avatar} 
-                alt={post.author.name} 
-                className="w-8 h-8 rounded-full object-cover mr-2"
-              />
-              <span className="text-sm text-gray-700">{post.author.name}</span>
+            <div className="flex items-center space-x-4 text-sm text-gray-500 dark:text-gray-400">
+              <div className="flex items-center">
+                <Calendar className="h-4 w-4 mr-1" />
+                <span>{post.publishedAt}</span>
+              </div>
+              <div className="flex items-center">
+                <MessageSquare className="h-4 w-4 mr-1" />
+                <span>{post.commentCount}</span>
+              </div>
+              <div className="flex items-center">
+                <Eye className="h-4 w-4 mr-1" />
+                <span>{post.viewCount}</span>
+              </div>
             </div>
-            <span className="text-sm text-gray-500">{post.readTime}</span>
+            <span className="text-sm text-gray-500 dark:text-gray-400">{post.readTime}</span>
           </div>
         </div>
       </Link>

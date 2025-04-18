@@ -20,7 +20,7 @@ export interface BlogPost {
   readTime: string;
   commentCount: number;
   viewCount: number;
-  coverImage?: string; // Add this optional property
+  coverImage?: string;
 }
 
 export const sampleBlogPosts: BlogPost[] = [
@@ -84,6 +84,44 @@ Here are some additional tips to help you maximize your experience:
 - **Join the Community**: Connect with other users, share your experiences, and get your questions answered in our community forum.
 - **Watch Tutorials**: We offer a variety of video tutorials that cover everything from basic setup to advanced techniques.
 
+## Code Examples
+
+Here's an example of using our JavaScript SDK:
+
+\`\`\`javascript
+// Advanced configuration example
+const config = {
+  model: "gpt-4",
+  temperature: 0.7,
+  maxTokens: 2000,
+  topP: 0.9
+};
+
+async function generateContent() {
+  try {
+    const response = await ai.generate({
+      prompt: "Write a technical blog post",
+      ...config
+    });
+    return response.text;
+  } catch (error) {
+    console.error("Generation failed:", error);
+  }
+}
+\`\`\`
+
+!note[
+The above configuration options are just examples. Adjust them based on your specific use case and requirements.
+]
+
+## Implementation Best Practices
+
+When implementing our AI tools, consider the following architecture:
+
+!figure[Architecture Diagram](/images/architecture.svg)[Figure 3: Recommended system architecture for AI integration]
+
+> "The key to successful AI implementation is starting small and scaling based on real feedback." - Tech Lead, AI Solutions Team
+
 ## Conclusion
 
 We're excited to have you on board and look forward to seeing the amazing things you'll create with our AI tools. If you have any questions or need assistance, don't hesitate to reach out to our support team.
@@ -101,12 +139,11 @@ Happy creating!
     commentCount: 12,
     viewCount: 324,
   },
-  // ... other blog posts
 ];
 
 interface BlogCardProps {
   post: BlogPost;
-  index?: number; // Add this optional prop
+  index?: number;
 }
 
 const BlogCard = ({ post }: BlogCardProps) => {

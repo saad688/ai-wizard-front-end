@@ -20,6 +20,7 @@ export interface BlogPost {
   readTime: string;
   commentCount: number;
   viewCount: number;
+  coverImage?: string; // Add this optional property
 }
 
 export const sampleBlogPosts: BlogPost[] = [
@@ -77,7 +78,17 @@ Here's what our users are saying:
 
 !figure[Dashboard Screenshot](/images/ai-dashboard.png)[Figure 2: AI Tools Dashboard Interface]
 
-// ... rest of the blog post content
+Here are some additional tips to help you maximize your experience:
+
+- **Explore the Documentation**: Our comprehensive documentation provides in-depth information on each tool and its capabilities.
+- **Join the Community**: Connect with other users, share your experiences, and get your questions answered in our community forum.
+- **Watch Tutorials**: We offer a variety of video tutorials that cover everything from basic setup to advanced techniques.
+
+## Conclusion
+
+We're excited to have you on board and look forward to seeing the amazing things you'll create with our AI tools. If you have any questions or need assistance, don't hesitate to reach out to our support team.
+
+Happy creating!
 `,
     category: 'Guides',
     tags: ['Getting Started', 'Tutorial', 'AI Tools'],
@@ -95,6 +106,7 @@ Here's what our users are saying:
 
 interface BlogCardProps {
   post: BlogPost;
+  index?: number; // Add this optional prop
 }
 
 const BlogCard = ({ post }: BlogCardProps) => {

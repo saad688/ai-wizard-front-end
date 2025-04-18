@@ -15,7 +15,7 @@ const steps = [
   {
     number: '03',
     title: 'Adjust Settings',
-    description: 'Fine-tune the parameters to get the exact results you\'re looking for.'
+    description: 'Fine-tune the parameters to get the exact results you're looking for.'
   },
   {
     number: '04',

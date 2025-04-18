@@ -13,6 +13,7 @@ import ToolDetail from "./pages/ToolDetail";
 import NotFound from "./pages/NotFound";
 import NoiseRemoverTool from "./pages/NoiseRemoverTool";
 import Blog from "./pages/Blog";
+import BlogDetail from "./pages/BlogDetail";
 
 const App = () => {
   const [queryClient] = useState(() => new QueryClient());
@@ -30,6 +31,7 @@ const App = () => {
             <Route path="/tools/:toolId" element={<ToolDetail />} />
             <Route path="/tools/noise-remover" element={<NoiseRemoverTool />} />
             <Route path="/blog" element={<Blog />} />
+            <Route path="/blog/:blogId" element={<BlogDetail />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </TooltipProvider>

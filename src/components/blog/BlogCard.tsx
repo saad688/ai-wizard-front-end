@@ -37,17 +37,18 @@ const BlogCard = ({ post, index }: BlogCardProps) => {
     >
       <Link to={`/blog/${post.id}`} className="block">
         <div className="p-6">
-          <div className="absolute top-3 right-3">
-            <span className="px-3 py-1 bg-indigo-600 text-white text-sm font-medium rounded-full">
-              {post.category}
-            </span>
-          </div>
-          
           <div className="relative h-48 mb-6 bg-gradient-to-br from-indigo-100 to-blue-50 dark:from-indigo-900/30 dark:to-blue-900/30 rounded-lg overflow-hidden group-hover:shadow-inner transition-all duration-300">
             <div className="absolute inset-0 flex items-center justify-center">
               <h3 className="text-2xl font-bold text-gray-800 dark:text-gray-100 p-6 text-center group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors">
                 {post.title}
               </h3>
+            </div>
+            
+            {/* Moved the category badge here to ensure it's always visible */}
+            <div className="absolute top-3 right-3 z-10">
+              <span className="px-3 py-1 bg-indigo-600 text-white text-sm font-medium rounded-full">
+                {post.category}
+              </span>
             </div>
           </div>
           

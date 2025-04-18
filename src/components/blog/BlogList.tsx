@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from 'react';
 import BlogCard, { BlogPost } from './BlogCard';
 import { Button } from '@/components/ui/button';
@@ -13,6 +14,7 @@ const sampleBlogPosts: BlogPost[] = [
     title: 'Introduction to AI: Understanding the Basics',
     excerpt: 'Learn the fundamental concepts of artificial intelligence and how it is transforming industries worldwide.',
     content: 'Full content here...',
+    coverImage: 'https://images.unsplash.com/photo-1677442135068-17b1c5c298cb?q=80&w=500',
     category: 'AI Basics',
     tags: ['AI', 'Machine Learning', 'Beginners'],
     author: {
@@ -29,6 +31,7 @@ const sampleBlogPosts: BlogPost[] = [
     title: 'Optimizing Image Processing with Our AI Tools',
     excerpt: 'Discover how our suite of AI-powered image processing tools can transform your workflow and save time.',
     content: 'Full content here...',
+    coverImage: 'https://images.unsplash.com/photo-1579403124614-197f69d8187b?q=80&w=500',
     category: 'Tutorials',
     tags: ['Image Processing', 'Optimization', 'Workflow'],
     author: {
@@ -45,6 +48,7 @@ const sampleBlogPosts: BlogPost[] = [
     title: 'The Future of Text Generation: GPT Models Explained',
     excerpt: 'An in-depth look at how GPT models work and what the future might hold for text generation technology.',
     content: 'Full content here...',
+    coverImage: 'https://images.unsplash.com/photo-1620712943543-bcc4688e7485?q=80&w=500',
     category: 'Research',
     tags: ['GPT', 'NLP', 'Text Generation'],
     author: {
@@ -61,6 +65,7 @@ const sampleBlogPosts: BlogPost[] = [
     title: 'Getting Started with Our Noise Remover Tool',
     excerpt: 'A step-by-step guide to using our noise remover tool for crystal clear audio in your projects.',
     content: 'Full content here...',
+    coverImage: 'https://images.unsplash.com/photo-1558478551-1a378f63328e?q=80&w=500',
     category: 'Tutorials',
     tags: ['Audio', 'Noise Removal', 'Beginners'],
     author: {
@@ -77,6 +82,7 @@ const sampleBlogPosts: BlogPost[] = [
     title: 'AI Ethics: Navigating the Challenges of Automated Systems',
     excerpt: 'Exploring the ethical considerations and challenges that come with implementing AI in various contexts.',
     content: 'Full content here...',
+    coverImage: 'https://images.unsplash.com/photo-1531297484001-80022131f5a1?q=80&w=500',
     category: 'Ethics',
     tags: ['Ethics', 'AI Impact', 'Society'],
     author: {
@@ -93,6 +99,7 @@ const sampleBlogPosts: BlogPost[] = [
     title: 'Comparing Top AI Tools in 2023: A Comprehensive Guide',
     excerpt: 'A detailed comparison of the most popular AI tools available today and how to choose the right one for your needs.',
     content: 'Full content here...',
+    coverImage: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=500',
     category: 'Comparisons',
     tags: ['Tools', 'Comparison', 'Decision Making'],
     author: {

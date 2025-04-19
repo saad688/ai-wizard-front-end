@@ -1,99 +1,61 @@
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import Navbar from '@/components/layout/Navbar';
 import Footer from '@/components/layout/Footer';
-import { BlogPost } from '@/components/blog/BlogCard';
-import { User, Calendar, Clock, Tag, Share2, ThumbsUp, MessageSquare, Bookmark, Eye, Code, FileCode, Quote, AlertCircle, Image } from 'lucide-react';
+import { BlogPost, BlogComment } from '@/components/blog/BlogCard';
+import { 
+  User, Calendar, Clock, Tag, Share2, ThumbsUp, MessageSquare, 
+  Bookmark, Eye, Code, FileCode, Quote, AlertCircle, Image, 
+  Send, Edit, Trash2 
+} from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent } from '@/components/ui/card';
+import { Textarea } from '@/components/ui/textarea';
+import { Input } from '@/components/ui/input';
 import { motion } from 'framer-motion';
+import { 
+  getBlogPostById, 
+  incrementBlogViews, 
+  likeBlogPost, 
+  addComment,
+  deleteBlogPost
+} from '@/lib/blog-service';
+import { useToast } from '@/hooks/use-toast';
 
-const sampleBlogPosts: BlogPost[] = [
-  {
-    id: '1',
-    title: 'Getting Started with Our AI Tools Suite',
-    excerpt: 'A comprehensive guide to help you get started with our growing collection of AI-powered tools.',
-    content: `
-# Getting Started with Our AI Tools Suite
+interface BlogDetailProps {
+  previewMode?: boolean;
+  previewPost?: BlogPost;
+}
 
-Welcome to our comprehensive guide on getting started with our AI tools! In this article, we'll walk you through the essentials of our platform and help you make the most of our powerful AI-driven solutions.
-
-## Why AI Tools Matter
-
-In today's fast-paced digital landscape, AI tools have become essential for businesses and individuals looking to streamline their workflows, enhance creativity, and solve complex problems efficiently. Our suite of tools is designed with simplicity and power in mind, making advanced AI capabilities accessible to everyone.
-
-### The Core Benefits
-
-- **Efficiency:** Automate repetitive tasks and focus on what matters most
-- **Creativity:** Generate new ideas and content with AI assistance
-- **Analysis:** Gain deeper insights from your data with intelligent processing
-- **Accessibility:** Use advanced technology with an intuitive interface
-
-## Your First Steps
-
-Getting started with our platform is simple. Here's a step-by-step guide:
-
-1. **Create your account:** Sign up with your email address and set a secure password
-2. **Explore the dashboard:** Familiarize yourself with our tool categories and features
-3. **Try a simple project:** Start with a basic task to see the AI in action
-4. **Review and refine:** Analyze the results and adjust your inputs as needed
-
-### Recommended First Tools
-
-For newcomers, we suggest starting with these beginner-friendly tools:
-
-- **Text Generator:** Create content effortlessly
-- **Image Enhancer:** Improve your visuals with a single click
-- **Data Summarizer:** Extract key insights from complex documents
-
-## Advanced Features for Power Users
-
-Once you're comfortable with the basics, you can explore our advanced features:
-
-- Custom model training
-- API integrations
-- Batch processing
-- Collaborative workflows
-
-## Community and Resources
-
-Don't forget to join our community forum where you can:
-- Share your projects
-- Get help from other users
-- Learn new techniques
-- Stay updated on the latest features
-
-## Conclusion
-
-Our AI tools suite is designed to grow with you, from simple beginnings to advanced applications. We're excited to see what you'll create with these powerful capabilities at your fingertips!
-    `,
-    category: 'Guides',
-    tags: ['Getting Started', 'Tutorial', 'AI Tools'],
-    author: {
-      name: 'Alex Johnson',
-      avatar: 'https://images.unsplash.com/photo-1633332755192-727a05c4013d?w=150&h=150&crop=faces&q=80',
-    },
-    publishedAt: 'April 18, 2025',
-    readTime: '5 min read',
-    commentCount: 12,
-    viewCount: 324,
-  },
-];
-
-const BlogDetail = () => {
+const BlogDetail = ({ previewMode = false, previewPost }: BlogDetailProps) => {
   const { blogId } = useParams<{ blogId: string }>();
+  const { toast } = useToast();
   const [post, setPost] = useState<BlogPost | null>(null);
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(!previewMode);
+  const [newComment, setNewComment] = useState('');
+  const [commentName, setCommentName] = useState('');
+  const [liked, setLiked] = useState(false);
 
   useEffect(() => {
+    if (previewMode && previewPost) {
+      setPost(previewPost);
+      return;
+    }
+
     setIsLoading(true);
-    setTimeout(() => {
-      const foundPost = sampleBlogPosts.find(p => p.id === blogId);
-      setPost(foundPost || null);
-      setIsLoading(false);
-    }, 500);
-  }, [blogId]);
+    
+    if (blogId) {
+      const foundPost = getBlogPostById(blogId);
+      
+      if (foundPost) {
+        setPost(foundPost);
+        if (!previewMode) incrementBlogViews(blogId);
+      }
+    }
+    
+    setIsLoading(false);
+  }, [blogId, previewMode, previewPost]);
 
   const formatContent = (content: string) => {
     let formatted = content
@@ -163,6 +125,82 @@ const BlogDetail = () => {
     return formatted;
   };
 
+  const handleAddComment = () => {
+    if (!post || !blogId || !newComment.trim() || !commentName.trim()) {
+      toast({
+        title: "Missing Information",
+        description: "Please provide your name and a comment",
+        variant: "destructive"
+      });
+      return;
+    }
+
+    const comment: BlogComment = {
+      author: commentName,
+      content: newComment,
+      date: new Date().toLocaleDateString('en-US', {
+        year: 'numeric', 
+        month: 'long', 
+        day: 'numeric'
+      }),
+      avatar: 'https://images.unsplash.com/photo-1599566150163-29194dcaad36?w=150&h=150&crop=faces&q=80'
+    };
+
+    addComment(blogId, comment);
+
+    setPost(prev => {
+      if (!prev) return null;
+      
+      const updatedComments = [...(prev.comments || []), comment];
+      return {
+        ...prev,
+        comments: updatedComments,
+        commentCount: updatedComments.length
+      };
+    });
+
+    setNewComment('');
+    
+    toast({
+      title: "Comment Posted",
+      description: "Your comment has been added to the blog"
+    });
+  };
+
+  const handleLike = () => {
+    if (!post || !blogId || liked) return;
+    
+    likeBlogPost(blogId);
+    setLiked(true);
+    
+    setPost(prev => {
+      if (!prev) return null;
+      return {
+        ...prev,
+        likes: (prev.likes || 0) + 1
+      };
+    });
+    
+    toast({
+      title: "Blog Liked",
+      description: "You liked this blog post"
+    });
+  };
+
+  const handleDelete = () => {
+    if (!blogId || previewMode) return;
+    
+    if (window.confirm("Are you sure you want to delete this blog post? This action cannot be undone.")) {
+      deleteBlogPost(blogId);
+      toast({
+        title: "Blog Deleted",
+        description: "The blog post has been deleted successfully"
+      });
+      
+      window.location.href = '/blog';
+    }
+  };
+
   if (isLoading) {
     return (
       <div className="min-h-screen flex flex-col">
@@ -192,7 +230,7 @@ const BlogDetail = () => {
             <h1 className="text-3xl font-bold mb-4">Blog Post Not Found</h1>
             <p className="mb-6">The blog post you're looking for doesn't exist or has been removed.</p>
             <Button asChild>
-              <a href="/blog">Return to Blog</a>
+              <Link to="/blog">Return to Blog</Link>
             </Button>
           </div>
         </main>
@@ -202,20 +240,21 @@ const BlogDetail = () => {
   }
 
   return (
-    <div className="min-h-screen flex flex-col">
-      <Navbar />
-      <main className="flex-grow">
-        <section className="w-full bg-gradient-to-b from-indigo-50 to-white dark:from-gray-900 dark:to-gray-800 pt-20 pb-10">
-          <div className="container mx-auto px-4">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-              className="max-w-4xl mx-auto text-center"
-            >
+    <div className={`min-h-screen flex flex-col ${previewMode ? 'pt-0' : ''}`}>
+      {!previewMode && <Navbar />}
+      <main className={`flex-grow ${previewMode ? 'pt-0' : ''}`}>
+        {post.coverImage && (
+          <div className="w-full h-[40vh] relative">
+            <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent z-10"></div>
+            <img 
+              src={post.coverImage} 
+              alt={post.title}
+              className="w-full h-full object-cover"
+            />
+            <div className="absolute bottom-0 left-0 right-0 z-20 container mx-auto px-4 py-8">
               <Badge className="mb-4 bg-indigo-600 hover:bg-indigo-700">{post.category}</Badge>
-              <h1 className="text-4xl md:text-5xl font-bold mb-6 text-gray-900 dark:text-white">{post.title}</h1>
-              <div className="flex flex-wrap justify-center items-center gap-4 mb-8 text-gray-700 dark:text-gray-300">
+              <h1 className="text-4xl md:text-5xl font-bold mb-6 text-white">{post.title}</h1>
+              <div className="flex flex-wrap gap-4 text-gray-200">
                 <div className="flex items-center">
                   <User className="w-4 h-4 mr-2" />
                   <span className="font-medium">{post.author.name}</span>
@@ -233,9 +272,43 @@ const BlogDetail = () => {
                   <span>{post.viewCount} views</span>
                 </div>
               </div>
-            </motion.div>
+            </div>
           </div>
-        </section>
+        )}
+        
+        {!post.coverImage && (
+          <section className="w-full bg-gradient-to-b from-indigo-50 to-white dark:from-gray-900 dark:to-gray-800 pt-20 pb-10">
+            <div className="container mx-auto px-4">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6 }}
+                className="max-w-4xl mx-auto text-center"
+              >
+                <Badge className="mb-4 bg-indigo-600 hover:bg-indigo-700">{post.category}</Badge>
+                <h1 className="text-4xl md:text-5xl font-bold mb-6 text-gray-900 dark:text-white">{post.title}</h1>
+                <div className="flex flex-wrap justify-center items-center gap-4 mb-8 text-gray-700 dark:text-gray-300">
+                  <div className="flex items-center">
+                    <User className="w-4 h-4 mr-2" />
+                    <span className="font-medium">{post.author.name}</span>
+                  </div>
+                  <div className="flex items-center">
+                    <Calendar className="w-4 h-4 mr-2" />
+                    <span>{post.publishedAt}</span>
+                  </div>
+                  <div className="flex items-center">
+                    <Clock className="w-4 h-4 mr-2" />
+                    <span>{post.readTime}</span>
+                  </div>
+                  <div className="flex items-center">
+                    <Eye className="w-4 h-4 mr-2" />
+                    <span>{post.viewCount} views</span>
+                  </div>
+                </div>
+              </motion.div>
+            </div>
+          </section>
+        )}
 
         <section className="py-12">
           <div className="container mx-auto px-4">
@@ -260,6 +333,25 @@ const BlogDetail = () => {
                       </div>
                     </div>
                     <div className="flex space-x-2">
+                      {!previewMode && (
+                        <>
+                          <Button variant="outline" size="sm" className="flex items-center gap-1" asChild>
+                            <Link to={`/edit-blog/${post.id}`}>
+                              <Edit className="h-4 w-4" />
+                              <span className="hidden sm:inline">Edit</span>
+                            </Link>
+                          </Button>
+                          <Button 
+                            variant="outline" 
+                            size="sm" 
+                            className="flex items-center gap-1 text-red-500 hover:text-red-600"
+                            onClick={handleDelete}
+                          >
+                            <Trash2 className="h-4 w-4" />
+                            <span className="hidden sm:inline">Delete</span>
+                          </Button>
+                        </>
+                      )}
                       <Button variant="outline" size="sm" className="flex items-center gap-1">
                         <Share2 className="h-4 w-4" />
                         <span className="hidden sm:inline">Share</span>
@@ -290,63 +382,86 @@ const BlogDetail = () => {
                   <div className="mt-10 border-t border-b border-gray-200 dark:border-gray-700 py-6 my-6">
                     <div className="flex justify-between items-center">
                       <div className="flex items-center gap-4">
-                        <Button variant="outline" className="flex items-center gap-2">
+                        <Button 
+                          variant={liked ? "default" : "outline"} 
+                          className={`flex items-center gap-2 ${liked ? 'bg-indigo-500 hover:bg-indigo-600' : ''}`}
+                          onClick={handleLike}
+                          disabled={liked}
+                        >
                           <ThumbsUp className="h-4 w-4" />
-                          <span>Like</span>
+                          <span>{post.likes || 0} {post.likes === 1 ? 'Like' : 'Likes'}</span>
                         </Button>
                         <Button variant="outline" className="flex items-center gap-2">
                           <MessageSquare className="h-4 w-4" />
-                          <span>Comment</span>
+                          <span>{post.commentCount} {post.commentCount === 1 ? 'Comment' : 'Comments'}</span>
                         </Button>
-                      </div>
-                      <div className="text-sm text-gray-500 dark:text-gray-400">
-                        {post.commentCount} comments
                       </div>
                     </div>
                   </div>
 
+                  {!previewMode && (
+                    <div className="mt-10">
+                      <h3 className="text-2xl font-bold mb-6">Leave a Comment</h3>
+                      <Card className="mb-6">
+                        <CardContent className="pt-6">
+                          <div className="mb-4">
+                            <Input
+                              placeholder="Your Name"
+                              value={commentName}
+                              onChange={(e) => setCommentName(e.target.value)}
+                              className="mb-4"
+                            />
+                            <Textarea
+                              placeholder="Write your comment..."
+                              value={newComment}
+                              onChange={(e) => setNewComment(e.target.value)}
+                              className="mb-4"
+                              rows={4}
+                            />
+                            <Button 
+                              onClick={handleAddComment}
+                              className="bg-gradient-to-r from-indigo-600 to-blue-600 hover:from-indigo-700 hover:to-blue-700 flex items-center gap-2"
+                            >
+                              <Send className="h-4 w-4" />
+                              Post Comment
+                            </Button>
+                          </div>
+                        </CardContent>
+                      </Card>
+                    </div>
+                  )}
+
                   <div className="mt-10">
-                    <h3 className="text-2xl font-bold mb-6">Comments</h3>
-                    <Card className="mb-6">
-                      <CardContent className="pt-6">
-                        <div className="flex items-start space-x-4">
-                          <img
-                            src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=150&h=150&crop=faces&q=80"
-                            alt="User"
-                            className="w-10 h-10 rounded-full"
-                          />
-                          <div>
-                            <div className="flex items-center mb-1">
-                              <h4 className="font-medium text-gray-900 dark:text-gray-100 mr-2">Michael Robert</h4>
-                              <span className="text-xs text-gray-500 dark:text-gray-400">3 days ago</span>
+                    <h3 className="text-2xl font-bold mb-6">Comments ({post.commentCount})</h3>
+                    {post.comments && post.comments.length > 0 ? (
+                      post.comments.map((comment, index) => (
+                        <Card key={index} className="mb-6">
+                          <CardContent className="pt-6">
+                            <div className="flex items-start space-x-4">
+                              <img
+                                src={comment.avatar || "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=150&h=150&crop=faces&q=80"}
+                                alt={comment.author}
+                                className="w-10 h-10 rounded-full"
+                              />
+                              <div>
+                                <div className="flex items-center mb-1">
+                                  <h4 className="font-medium text-gray-900 dark:text-gray-100 mr-2">{comment.author}</h4>
+                                  <span className="text-xs text-gray-500 dark:text-gray-400">{comment.date}</span>
+                                </div>
+                                <p className="text-gray-700 dark:text-gray-300">
+                                  {comment.content}
+                                </p>
+                              </div>
                             </div>
-                            <p className="text-gray-700 dark:text-gray-300">
-                              Great article! The walkthrough of the core benefits really helped me understand how I can use these tools for my projects.
-                            </p>
-                          </div>
-                        </div>
-                      </CardContent>
-                    </Card>
-                    <Card>
-                      <CardContent className="pt-6">
-                        <div className="flex items-start space-x-4">
-                          <img
-                            src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150&h=150&crop=faces&q=80"
-                            alt="User"
-                            className="w-10 h-10 rounded-full"
-                          />
-                          <div>
-                            <div className="flex items-center mb-1">
-                              <h4 className="font-medium text-gray-900 dark:text-gray-100 mr-2">Sarah Wilson</h4>
-                              <span className="text-xs text-gray-500 dark:text-gray-400">1 week ago</span>
-                            </div>
-                            <p className="text-gray-700 dark:text-gray-300">
-                              I've been looking for a simple explanation of how to get started with AI tools. This is exactly what I needed!
-                            </p>
-                          </div>
-                        </div>
-                      </CardContent>
-                    </Card>
+                          </CardContent>
+                        </Card>
+                      ))
+                    ) : (
+                      <div className="text-center py-8 text-gray-500">
+                        <MessageSquare className="w-12 h-12 mx-auto mb-4 opacity-20" />
+                        <p>No comments yet. Be the first to share your thoughts!</p>
+                      </div>
+                    )}
                   </div>
                 </div>
               </motion.div>
@@ -411,7 +526,7 @@ const BlogDetail = () => {
           </div>
         </section>
       </main>
-      <Footer />
+      {!previewMode && <Footer />}
     </div>
   );
 };

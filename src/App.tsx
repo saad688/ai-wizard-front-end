@@ -14,6 +14,7 @@ import NotFound from "./pages/NotFound";
 import NoiseRemoverTool from "./pages/NoiseRemoverTool";
 import Blog from "./pages/Blog";
 import BlogDetail from "./pages/BlogDetail";
+import CreateBlog from "./pages/CreateBlog";
 
 const App = () => {
   const [queryClient] = useState(() => new QueryClient());
@@ -32,6 +33,8 @@ const App = () => {
             <Route path="/tools/noise-remover" element={<NoiseRemoverTool />} />
             <Route path="/blog" element={<Blog />} />
             <Route path="/blog/:blogId" element={<BlogDetail />} />
+            <Route path="/create-blog" element={<CreateBlog />} />
+            <Route path="/edit-blog/:blogId" element={<CreateBlog />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </TooltipProvider>

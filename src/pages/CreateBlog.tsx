@@ -1,4 +1,3 @@
-
 import { useState, useRef, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import Navbar from '@/components/layout/Navbar';
@@ -59,7 +58,6 @@ const CreateBlog = () => {
   
   const editorRef = useRef<HTMLTextAreaElement>(null);
   
-  // Load post data if editing
   useEffect(() => {
     if (blogId) {
       const post = getBlogPostById(blogId);
@@ -89,7 +87,6 @@ const CreateBlog = () => {
     
     setContent(newText);
     
-    // Set selection after update
     setTimeout(() => {
       textarea.focus();
       textarea.setSelectionRange(
@@ -153,7 +150,7 @@ const CreateBlog = () => {
       toast({
         title: publish ? "Blog Published!" : "Draft Saved",
         description: publish 
-          ? "Your blog post is now live on the blog page" $
+          ? "Your blog post is now live on the blog page"
           : "Your draft has been saved successfully",
       });
       

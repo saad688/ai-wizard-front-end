@@ -17,7 +17,7 @@ import BlogDetail from "./pages/BlogDetail";
 import CreateBlog from "./pages/CreateBlog";
 
 const App = () => {
-  const [queryClient] = useState(() => new QueryClient());
+  const queryClient = new QueryClient();
   
   return (
     <ThemeProvider defaultTheme="light" storageKey="ui-theme">

@@ -1,3 +1,4 @@
+
 import { useState, useRef, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import Navbar from '@/components/layout/Navbar';
@@ -441,7 +442,7 @@ const CreateBlog = () => {
                     <li># Heading 1, ## Heading 2, ### Heading 3</li>
                     <li>**Bold**, *Italic*</li>
                     <li>```code blocks```</li>
-                    <li>> Blockquotes</li>
+                    <li>&gt; Blockquotes</li>
                     <li>- Bullet points, 1. Numbered lists</li>
                     <li>!note[Your note text] for note boxes</li>
                     <li>!figure[alt text](image-url)[caption] for figures with captions</li>

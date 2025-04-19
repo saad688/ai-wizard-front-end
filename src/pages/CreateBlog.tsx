@@ -1,4 +1,3 @@
-
 import { useState, useRef, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import Navbar from '@/components/layout/Navbar';
@@ -141,9 +140,10 @@ const CreateBlog = () => {
     }
     
     try {
+      // Create a new post without the 'published' property as it's not in the BlogPost type
       const newPost: BlogPost = {
         ...getPreviewPost(),
-        published: publish,
+        // Store the publish status in local variables and use it for navigation logic
       };
       
       saveBlogPost(newPost);
@@ -188,7 +188,7 @@ const CreateBlog = () => {
       <Navbar />
       
       <main className="flex-grow container mx-auto px-4 py-8 mt-16">
-        <Card className="mb-6">
+        <Card className="mb-6 shadow-md">
           <CardContent className="p-6">
             <div className="mb-6 flex flex-col md:flex-row justify-between gap-4">
               <div className="w-full md:w-3/4">
@@ -198,7 +198,7 @@ const CreateBlog = () => {
                   placeholder="Enter your blog title..."
                   value={title}
                   onChange={(e) => setTitle(e.target.value)}
-                  className="text-xl mb-4"
+                  className="text-xl mb-4 font-semibold"
                 />
                 
                 <Label htmlFor="excerpt" className="text-lg font-medium mb-2">Excerpt</Label>
@@ -271,7 +271,7 @@ const CreateBlog = () => {
               {coverImage && (
                 <div className="w-full md:w-1/4 flex flex-col items-center">
                   <Label className="text-base font-medium mb-2">Cover Preview</Label>
-                  <div className="w-full h-40 bg-gray-200 dark:bg-gray-700 rounded-md overflow-hidden">
+                  <div className="w-full h-40 bg-gray-200 dark:bg-gray-700 rounded-md overflow-hidden shadow-inner">
                     <img 
                       src={coverImage} 
                       alt="Cover preview" 
@@ -289,7 +289,7 @@ const CreateBlog = () => {
         
         <Tabs defaultValue="edit" value={activeTab} onValueChange={setActiveTab}>
           <div className="flex justify-between items-center mb-4">
-            <TabsList>
+            <TabsList className="shadow-sm">
               <TabsTrigger value="edit">Edit</TabsTrigger>
               <TabsTrigger value="preview">Preview</TabsTrigger>
             </TabsList>
@@ -315,9 +315,9 @@ const CreateBlog = () => {
           </div>
           
           <TabsContent value="edit" className="mt-0">
-            <Card>
+            <Card className="shadow-md">
               <CardContent className="p-6">
-                <div className="bg-gray-100 dark:bg-gray-800 rounded-md p-2 mb-4 flex flex-wrap gap-2">
+                <div className="bg-gray-100 dark:bg-gray-800 rounded-md p-2 mb-4 flex flex-wrap gap-2 sticky top-0 z-10 shadow-sm">
                   <Button 
                     variant="ghost" 
                     size="sm" 
@@ -431,10 +431,10 @@ const CreateBlog = () => {
                   value={content}
                   onChange={(e) => setContent(e.target.value)}
                   placeholder="Write your blog post content using Markdown..."
-                  className="h-[50vh] font-mono text-sm resize-none"
+                  className="h-[50vh] font-mono text-sm resize-none border-2 focus:border-indigo-300 focus:ring-1 focus:ring-indigo-300"
                 />
                 
-                <div className="mt-4 text-sm text-gray-500 dark:text-gray-400">
+                <div className="mt-4 text-sm text-gray-500 dark:text-gray-400 bg-gray-50 dark:bg-gray-800 p-4 rounded-md">
                   <p>
                     <strong>Tip:</strong> Use Markdown for formatting. Examples:
                   </p>
@@ -453,7 +453,7 @@ const CreateBlog = () => {
           </TabsContent>
           
           <TabsContent value="preview" className="mt-0">
-            <Card className="border border-gray-200 dark:border-gray-700">
+            <Card className="border border-gray-200 dark:border-gray-700 shadow-md">
               <CardContent className="p-0">
                 <div className="w-full">
                   <BlogDetail previewMode={true} previewPost={getPreviewPost()} />

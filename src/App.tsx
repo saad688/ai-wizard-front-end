@@ -17,7 +17,8 @@ import BlogDetail from "./pages/BlogDetail";
 import CreateBlog from "./pages/CreateBlog";
 
 const App = () => {
-  const queryClient = new QueryClient();
+  // Properly initialize the QueryClient with useState to prevent "Cannot read properties of null" error
+  const [queryClient] = useState(() => new QueryClient());
   
   return (
     <ThemeProvider defaultTheme="light" storageKey="ui-theme">

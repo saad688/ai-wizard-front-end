@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Menu, X, ChevronDown } from 'lucide-react';
@@ -37,9 +36,12 @@ const Navbar = () => {
     )}>
       <div className="container mx-auto px-4 md:px-6">
         <div className="flex justify-between items-center">
-          {/* Logo */}
+          {/* Animated Logo */}
           <Link to="/" className="flex items-center space-x-2">
-            <span className="text-xl font-heading font-light tracking-tight text-gray-900">AI<span className="font-medium">Master</span></span>
+            <span className="text-xl font-heading">
+              <span className="font-light animate-pulse-subtle">AI</span>
+              <span className="font-medium bg-clip-text text-transparent bg-gradient-to-r from-indigo-500 to-purple-500 animate-gradient-shift">Master</span>
+            </span>
           </Link>
 
           {/* Desktop Navigation */}

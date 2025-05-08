@@ -3,6 +3,7 @@ import { Search } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { Input } from '@/components/ui/input';
 import BackgroundParticles from '@/components/tools/noise-remover/BackgroundParticles';
+import ToolIcon from '@/components/icons/ToolIcons';
 
 interface BlogHeroProps {
   searchQuery: string;
@@ -25,7 +26,7 @@ const BlogHero = ({ searchQuery, setSearchQuery }: BlogHeroProps) => {
         transition={{ duration: 0.7 }}
         className="container mx-auto text-center relative z-10"
       >
-        <h1 className="text-4xl md:text-5xl font-heading font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-indigo-600 to-blue-500 inline-block pb-2">
+        <h1 className="text-4xl md:text-5xl font-heading font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-indigo-600 to-blue-500 inline-block pb-2 px-4">
           Our Blog
         </h1>
         <p className="text-xl max-w-3xl mx-auto mb-10 text-gray-600">
@@ -45,7 +46,9 @@ const BlogHero = ({ searchQuery, setSearchQuery }: BlogHeroProps) => {
             onChange={(e) => setSearchQuery(e.target.value)}
             className="w-full py-6 px-4 rounded-md text-gray-800 pr-12 shadow-lg border-0 focus:ring-2 focus:ring-indigo-500/50 transition-all duration-300"
           />
-          <Search className="absolute right-4 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400" />
+          <div className="absolute right-4 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400">
+            <ToolIcon type="text-analyzer" className="h-5 w-5" />
+          </div>
         </motion.div>
       </motion.div>
     </section>

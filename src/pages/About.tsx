@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 import { Users, Award, Heart, Clock, ArrowRight } from 'lucide-react';
 import BackgroundParticles from '@/components/tools/noise-remover/BackgroundParticles';
 import { motion } from 'framer-motion';
+import ToolIcon from '@/components/icons/ToolIcons';
 
 const About = () => {
   const fadeInVariants = {
@@ -49,9 +50,9 @@ const About = () => {
               initial={{ scale: 0.9, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               transition={{ delay: 0.3, duration: 0.5 }}
-              className="w-16 h-16 rounded-full bg-gradient-to-r from-indigo-500 to-blue-600 mx-auto flex items-center justify-center"
+              className="w-16 h-16 rounded-full bg-gradient-to-r from-indigo-500/20 to-blue-600/20 mx-auto flex items-center justify-center"
             >
-              <Users className="h-8 w-8 text-white" />
+              <ToolIcon type="ai-assistant" className="h-10 w-10" />
             </motion.div>
           </motion.div>
         </section>
@@ -136,8 +137,8 @@ const About = () => {
                     transition={{ delay: 0.5, duration: 0.7 }}
                     className="text-center px-8 py-10 bg-white/60 backdrop-blur-md rounded-xl shadow-lg max-w-sm"
                   >
-                    <div className="mx-auto h-16 w-16 rounded-full bg-gradient-to-r from-indigo-600 to-blue-500 flex items-center justify-center mb-6">
-                      <Award className="h-8 w-8 text-white" />
+                    <div className="mx-auto h-16 w-16 rounded-full bg-gradient-to-r from-indigo-600/20 to-blue-500/20 flex items-center justify-center mb-6">
+                      <ToolIcon type="image-enhancer" className="h-10 w-10" />
                     </div>
                     <h3 className="text-xl font-bold text-gray-800 mb-3">Our Mission</h3>
                     <div className="w-16 h-0.5 bg-gradient-to-r from-indigo-500 to-blue-500 mx-auto mb-4"></div>
@@ -171,22 +172,22 @@ const About = () => {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
               {[
                 {
-                  icon: <Users className="h-7 w-7 text-white" />,
+                  icon: "ai-assistant",
                   title: "User-Centered",
                   description: "We design all our tools with the user in mind, ensuring they're intuitive and effective for real-world needs."
                 },
                 {
-                  icon: <Award className="h-7 w-7 text-white" />,
+                  icon: "data-visualizer",
                   title: "Excellence",
                   description: "We're committed to the highest standards of technical excellence and continuous improvement."
                 },
                 {
-                  icon: <Heart className="h-7 w-7 text-white" />,
+                  icon: "text-analyzer",
                   title: "Accessibility",
                   description: "We believe powerful AI should be accessible to everyone, regardless of technical expertise."
                 },
                 {
-                  icon: <Clock className="h-7 w-7 text-white" />,
+                  icon: "code-assistant",
                   title: "Innovation",
                   description: "We're constantly exploring the cutting edge of AI to bring the latest advancements to our users."
                 }
@@ -201,8 +202,8 @@ const About = () => {
                   className="bg-white p-8 rounded-xl shadow-lg transform transition-all duration-500 hover:shadow-xl hover:-translate-y-2 relative overflow-hidden group"
                 >
                   <div className="absolute -right-10 -top-10 w-40 h-40 bg-gradient-to-br from-indigo-500/20 to-blue-500/20 rounded-full transition-all duration-300 group-hover:scale-110"></div>
-                  <div className="h-14 w-14 rounded-full bg-gradient-to-r from-indigo-600 to-blue-500 flex items-center justify-center mb-6 relative">
-                    {value.icon}
+                  <div className="h-14 w-14 rounded-full bg-gradient-to-r from-indigo-600/20 to-blue-500/20 flex items-center justify-center mb-6 relative">
+                    <ToolIcon type={value.icon as any} className="h-8 w-8" />
                   </div>
                   <h3 className="text-xl font-bold text-gray-800 mb-4">{value.title}</h3>
                   <p className="text-gray-600 relative z-10">
@@ -237,17 +238,17 @@ const About = () => {
                 {
                   name: "Sarah Johnson",
                   role: "CEO & AI Researcher",
-                  gradient: "from-purple-500/20 to-indigo-500/20"
+                  icon: "ai-assistant"
                 },
                 {
                   name: "Michael Chen",
                   role: "CTO & Lead Engineer",
-                  gradient: "from-blue-500/20 to-cyan-500/20"
+                  icon: "code-assistant"
                 },
                 {
                   name: "Elena Rodriguez",
                   role: "Head of Product Design",
-                  gradient: "from-indigo-500/20 to-blue-500/20"
+                  icon: "image-enhancer"
                 }
               ].map((member, index) => (
                 <motion.div 
@@ -261,7 +262,7 @@ const About = () => {
                   {/* Replaced image with gradient animation */}
                   <div className="relative h-64 overflow-hidden">
                     <div className="absolute inset-0 bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:10px_10px] opacity-30"></div>
-                    <div className={`absolute inset-0 bg-gradient-to-br ${member.gradient}`}></div>
+                    <div className="absolute inset-0 bg-gradient-to-br from-indigo-500/20 to-blue-500/20"></div>
                     
                     {/* Animated particles */}
                     <motion.div 
@@ -292,8 +293,8 @@ const About = () => {
                       className="absolute inset-0 flex items-center justify-center"
                     >
                       <div className="h-24 w-24 rounded-full bg-white/80 backdrop-blur-sm flex items-center justify-center shadow-lg">
-                        <div className="h-20 w-20 rounded-full bg-gradient-to-r from-indigo-600 to-blue-500 flex items-center justify-center">
-                          <Users className="h-10 w-10 text-white" />
+                        <div className="h-20 w-20 rounded-full bg-gradient-to-r from-indigo-600/20 to-blue-500/20 flex items-center justify-center">
+                          <ToolIcon type={member.icon as any} className="h-12 w-12" />
                         </div>
                       </div>
                     </motion.div>

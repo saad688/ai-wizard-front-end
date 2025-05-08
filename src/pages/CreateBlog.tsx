@@ -1,3 +1,4 @@
+
 import { useState, useRef, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import Navbar from '@/components/layout/Navbar';
@@ -434,18 +435,18 @@ const CreateBlog = () => {
                   className="h-[50vh] font-mono text-sm resize-none border-2 focus:border-indigo-300 focus:ring-1 focus:ring-indigo-300"
                 />
                 
-                <div className="mt-4 text-sm text-gray-500 dark:text-gray-400 bg-gray-50 dark:bg-gray-800 p-4 rounded-md">
+                <div className="mt-4 text-sm text-gray-500 dark:text-gray-400 bg-gray-50 dark:bg-gray-800 p-4 rounded-md shadow-inner">
                   <p>
                     <strong>Tip:</strong> Use Markdown for formatting. Examples:
                   </p>
-                  <ul className="list-disc ml-5 mt-2">
-                    <li># Heading 1, ## Heading 2, ### Heading 3</li>
-                    <li>**Bold**, *Italic*</li>
-                    <li>```code blocks```</li>
-                    <li>&gt; Blockquotes</li>
-                    <li>- Bullet points, 1. Numbered lists</li>
-                    <li>!note[Your note text] for note boxes</li>
-                    <li>!figure[alt text](image-url)[caption] for figures with captions</li>
+                  <ul className="list-disc ml-5 mt-2 space-y-1">
+                    <li><code className="px-1 py-0.5 bg-gray-100 dark:bg-gray-700 rounded text-xs"># Heading 1</code>, <code className="px-1 py-0.5 bg-gray-100 dark:bg-gray-700 rounded text-xs">## Heading 2</code>, <code className="px-1 py-0.5 bg-gray-100 dark:bg-gray-700 rounded text-xs">### Heading 3</code></li>
+                    <li><code className="px-1 py-0.5 bg-gray-100 dark:bg-gray-700 rounded text-xs">**Bold text**</code>, <code className="px-1 py-0.5 bg-gray-100 dark:bg-gray-700 rounded text-xs">*Italic text*</code></li>
+                    <li><code className="px-1 py-0.5 bg-gray-100 dark:bg-gray-700 rounded text-xs">```code blocks```</code> (use triple backticks)</li>
+                    <li><code className="px-1 py-0.5 bg-gray-100 dark:bg-gray-700 rounded text-xs">&gt; Blockquotes</code> (use &gt; at the beginning of a line)</li>
+                    <li><code className="px-1 py-0.5 bg-gray-100 dark:bg-gray-700 rounded text-xs">- Bullet points</code>, <code className="px-1 py-0.5 bg-gray-100 dark:bg-gray-700 rounded text-xs">1. Numbered lists</code></li>
+                    <li><code className="px-1 py-0.5 bg-gray-100 dark:bg-gray-700 rounded text-xs">!note[Your note text]</code> for note boxes</li>
+                    <li><code className="px-1 py-0.5 bg-gray-100 dark:bg-gray-700 rounded text-xs">!figure[alt text](image-url)[caption]</code> for figures with captions</li>
                   </ul>
                 </div>
               </CardContent>

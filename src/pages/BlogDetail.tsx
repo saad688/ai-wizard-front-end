@@ -1,4 +1,3 @@
-
 import { useParams, Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import Navbar from '@/components/layout/Navbar';
@@ -59,77 +58,205 @@ const BlogDetail = ({ previewMode = false, previewPost }: BlogDetailProps) => {
   }, [blogId, previewMode, previewPost]);
 
   const formatContent = (content: string) => {
-    // Improved content formatting to make the blog look better
-    let formatted = content
-      .replace(/^# (.*$)/gm, '<h1 class="text-3xl md:text-4xl font-bold mt-10 mb-6 text-gray-900 dark:text-gray-50 border-b pb-2 border-gray-200 dark:border-gray-700">$1</h1>')
-      .replace(/^## (.*$)/gm, '<h2 class="text-2xl md:text-3xl font-semibold mt-8 mb-4 text-gray-800 dark:text-gray-100">$1</h2>')
-      .replace(/^### (.*$)/gm, '<h3 class="text-xl md:text-2xl font-semibold mt-6 mb-3 text-gray-800 dark:text-gray-200">$1</h3>')
-      .replace(/^- (.*$)/gm, '<li class="ml-6 list-disc my-2 text-gray-700 dark:text-gray-300">$1</li>')
-      .replace(/^(\d+)\. (.*$)/gm, '<li class="ml-6 list-decimal my-2 text-gray-700 dark:text-gray-300">$1. $2</li>');
-
-    // Code blocks with improved styling
-    formatted = formatted.replace(/```([a-z]*)\n([\s\S]*?)```/gm, (match, language, code) => `
-      <div class="relative my-6 rounded-lg overflow-hidden shadow-lg">
-        <div class="flex items-center justify-between bg-gray-800 dark:bg-gray-900 px-4 py-2">
-          <div class="flex items-center gap-2">
-            <Code class="w-4 h-4 text-gray-400" />
-            <span class="text-sm font-mono text-gray-400">${language || 'code'}</span>
-          </div>
-        </div>
-        <pre class="bg-gray-900 dark:bg-gray-950 p-4 overflow-x-auto">
-          <code class="text-sm font-mono text-gray-200">${code.trim()}</code>
-        </pre>
-      </div>
-    `);
-
-    // Blockquotes with improved styling
-    formatted = formatted.replace(/^> (.*$)/gm, (match, quote) => `
-      <blockquote class="my-6 border-l-4 border-indigo-500 pl-4 italic bg-indigo-50 dark:bg-indigo-900/20 p-4 rounded-r-lg">
-        <div class="flex items-start gap-3">
-          <Quote class="w-5 h-5 text-indigo-500 mt-1 flex-shrink-0" />
-          <p class="text-gray-700 dark:text-gray-300">${quote}</p>
-        </div>
-      </blockquote>
-    `);
-
-    // Note boxes with improved styling
-    formatted = formatted.replace(/!note\[([\s\S]*?)\]/gm, (match, content) => `
-      <div class="my-6 bg-blue-50 dark:bg-blue-950/30 border-l-4 border-blue-500 p-4 rounded-r-lg shadow-sm">
-        <div class="flex items-start gap-3">
-          <AlertCircle class="w-5 h-5 text-blue-500 mt-1 flex-shrink-0" />
-          <div>
-            <h4 class="font-semibold text-blue-700 dark:text-blue-300 mb-2">Note</h4>
-            <p class="text-blue-700 dark:text-blue-300">${content}</p>
-          </div>
-        </div>
-      </div>
-    `);
-
-    // Figures with improved styling
-    formatted = formatted.replace(/!figure\[(.*?)\]\((.*?)\)\[(.*?)\]/gm, (match, alt, src, caption) => `
-      <figure class="my-8">
-        <div class="rounded-lg overflow-hidden bg-gray-100 dark:bg-gray-800 shadow-lg">
-          <img src="${src}" alt="${alt}" class="w-full h-auto" />
-        </div>
-        <figcaption class="mt-3 text-sm text-center text-gray-600 dark:text-gray-400 italic">
-          <div class="flex items-center justify-center gap-2">
-            <Image class="w-4 h-4" />
-            <span>${caption}</span>
-          </div>
-        </figcaption>
-      </figure>
-    `);
-
-    // Improve paragraph styling
-    const paragraphs = formatted.split('\n\n');
-    formatted = paragraphs.map(p => {
-      if (!p.startsWith('<') && p.trim().length > 0) {
-        return `<p class="my-4 text-gray-700 dark:text-gray-300 leading-relaxed text-lg">${p}</p>`;
-      }
-      return p;
-    }).join('\n\n');
+    // First, escape HTML to prevent XSS
+    const escapeHtml = (unsafe: string) => {
+      return unsafe
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+    };
     
-    return formatted;
+    // Split by new lines to process one line at a time
+    let lines = content.split('\n');
+    let formatted = [];
+    let inList = false;
+    let listType = '';
+    let inCodeBlock = false;
+    let codeLanguage = '';
+    let codeContent = [];
+    
+    for (let i = 0; i < lines.length; i++) {
+      let line = lines[i];
+      
+      // Handle code blocks
+      if (line.trim().startsWith('```')) {
+        if (!inCodeBlock) {
+          // Starting a code block
+          inCodeBlock = true;
+          codeLanguage = line.trim().substring(3).trim();
+          codeContent = [];
+          continue;
+        } else {
+          // Ending a code block
+          inCodeBlock = false;
+          formatted.push(`
+            <div class="relative my-6 rounded-lg overflow-hidden shadow-lg">
+              <div class="flex items-center justify-between bg-gray-800 dark:bg-gray-900 px-4 py-2">
+                <div class="flex items-center gap-2">
+                  <svg class="w-4 h-4 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m18 16 4-4-4-4"></path><path d="m6 8-4 4 4 4"></path><path d="m14.5 4-5 16"></path></svg>
+                  <span class="text-sm font-mono text-gray-400">${codeLanguage || 'code'}</span>
+                </div>
+              </div>
+              <pre class="bg-gray-900 dark:bg-gray-950 p-4 overflow-x-auto">
+                <code class="text-sm font-mono text-gray-200">${codeContent.join('\n')}</code>
+              </pre>
+            </div>
+          `);
+          continue;
+        }
+      }
+      
+      // If we're in a code block, add the line to code content
+      if (inCodeBlock) {
+        codeContent.push(escapeHtml(line));
+        continue;
+      }
+      
+      // Handle headings
+      if (line.startsWith('# ')) {
+        formatted.push(`<h1 class="text-3xl md:text-4xl font-bold mt-10 mb-6 text-gray-900 dark:text-gray-50 border-b pb-2 border-gray-200 dark:border-gray-700">${line.substring(2)}</h1>`);
+        continue;
+      } else if (line.startsWith('## ')) {
+        formatted.push(`<h2 class="text-2xl md:text-3xl font-semibold mt-8 mb-4 text-gray-800 dark:text-gray-100">${line.substring(3)}</h2>`);
+        continue;
+      } else if (line.startsWith('### ')) {
+        formatted.push(`<h3 class="text-xl md:text-2xl font-semibold mt-6 mb-3 text-gray-800 dark:text-gray-200">${line.substring(4)}</h3>`);
+        continue;
+      }
+      
+      // Handle lists
+      if (line.match(/^- /)) {
+        if (!inList || listType !== 'ul') {
+          if (inList) formatted.push('</ul>');
+          formatted.push('<ul class="list-disc pl-6 my-4">');
+          inList = true;
+          listType = 'ul';
+        }
+        formatted.push(`<li class="my-2 text-gray-700 dark:text-gray-300">${formatInline(line.substring(2))}</li>`);
+        continue;
+      } else if (line.match(/^\d+\. /)) {
+        if (!inList || listType !== 'ol') {
+          if (inList) formatted.push('</ol>');
+          formatted.push('<ol class="list-decimal pl-6 my-4">');
+          inList = true;
+          listType = 'ol';
+        }
+        formatted.push(`<li class="my-2 text-gray-700 dark:text-gray-300">${formatInline(line.substring(line.indexOf('.')+2))}</li>`);
+        continue;
+      } else if (inList && line.trim() === '') {
+        formatted.push(listType === 'ul' ? '</ul>' : '</ol>');
+        inList = false;
+      }
+      
+      // Handle blockquotes
+      if (line.startsWith('> ')) {
+        formatted.push(`
+          <blockquote class="my-6 border-l-4 border-indigo-500 pl-4 italic bg-indigo-50 dark:bg-indigo-900/20 p-4 rounded-r-lg">
+            <div class="flex items-start gap-3">
+              <svg class="w-5 h-5 text-indigo-500 mt-1 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21c3 0 7-1 7-8V5c0-1.25-.756-2.017-2-2H4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2 1 0 1 0 1 1v1c0 1-1 2-2 2s-1 .008-1 1.031V20c0 1 0 1 1 1z"></path><path d="M15 21c3 0 7-1 7-8V5c0-1.25-.757-2.017-2-2h-4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2h.75c0 2.25.25 4-2.75 4v3c0 1 0 1 1 1z"></path></svg>
+              <p class="text-gray-700 dark:text-gray-300">${formatInline(line.substring(2))}</p>
+            </div>
+          </blockquote>
+        `);
+        continue;
+      }
+      
+      // Handle note boxes
+      if (line.startsWith('!note[')) {
+        let noteContent = '';
+        const startIndex = line.indexOf('[') + 1;
+        
+        // Check if the note content is on multiple lines
+        if (line.includes(']')) {
+          // Single line note
+          noteContent = line.substring(startIndex, line.indexOf(']', startIndex));
+        } else {
+          // Multi-line note, collect until we find the closing bracket
+          noteContent = line.substring(startIndex);
+          let j = i + 1;
+          while (j < lines.length && !lines[j].includes(']')) {
+            noteContent += '\n' + lines[j];
+            j++;
+          }
+          
+          if (j < lines.length) {
+            noteContent += '\n' + lines[j].substring(0, lines[j].indexOf(']'));
+            i = j; // Skip processed lines
+          }
+        }
+        
+        formatted.push(`
+          <div class="my-6 bg-blue-50 dark:bg-blue-950/30 border-l-4 border-blue-500 p-4 rounded-r-lg shadow-sm">
+            <div class="flex items-start gap-3">
+              <svg class="w-5 h-5 text-blue-500 mt-1 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M12 16v-4"></path><path d="M12 8h.01"></path></svg>
+              <div>
+                <h4 class="font-semibold text-blue-700 dark:text-blue-300 mb-2">Note</h4>
+                <p class="text-blue-700 dark:text-blue-300">${formatInline(noteContent)}</p>
+              </div>
+            </div>
+          </div>
+        `);
+        continue;
+      }
+      
+      // Handle figures with captions
+      const figureMatch = line.match(/!figure\[(.*?)\]\((.*?)\)\[(.*?)\]/);
+      if (figureMatch) {
+        const [_, alt, src, caption] = figureMatch;
+        formatted.push(`
+          <figure class="my-8">
+            <div class="rounded-lg overflow-hidden bg-gray-100 dark:bg-gray-800 shadow-lg">
+              <img src="${src}" alt="${alt}" class="w-full h-auto" />
+            </div>
+            <figcaption class="mt-3 text-sm text-center text-gray-600 dark:text-gray-400 italic">
+              <div class="flex items-center justify-center gap-2">
+                <svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"></rect><circle cx="9" cy="9" r="2"></circle><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"></path></svg>
+                <span>${caption}</span>
+              </div>
+            </figcaption>
+          </figure>
+        `);
+        continue;
+      }
+      
+      // Handle empty lines - create paragraph breaks
+      if (line.trim() === '') {
+        if (inList) {
+          formatted.push(listType === 'ul' ? '</ul>' : '</ol>');
+          inList = false;
+        }
+        continue;
+      }
+      
+      // For regular paragraph text
+      formatted.push(`<p class="my-4 text-gray-700 dark:text-gray-300 leading-relaxed text-lg">${formatInline(line)}</p>`);
+    }
+    
+    // Close any open lists
+    if (inList) {
+      formatted.push(listType === 'ul' ? '</ul>' : '</ol>');
+    }
+    
+    // Helper function to format inline markdown (bold, italic, etc)
+    function formatInline(text) {
+      // Handle bold text
+      text = text.replace(/\*\*(.*?)\*\*/g, '<strong class="font-bold">$1</strong>');
+      
+      // Handle italic text
+      text = text.replace(/\*(.*?)\*/g, '<em class="italic">$1</em>');
+      
+      // Handle inline code
+      text = text.replace(/`(.*?)`/g, '<code class="px-1.5 py-0.5 bg-gray-100 dark:bg-gray-800 rounded text-sm font-mono border border-gray-200 dark:border-gray-700">$1</code>');
+      
+      // Handle links
+      text = text.replace(/\[(.*?)\]\((.*?)\)/g, '<a href="$2" class="text-indigo-600 dark:text-indigo-400 hover:underline">$1</a>');
+      
+      return text;
+    }
+    
+    return formatted.join('\n');
   };
 
   const handleAddComment = () => {

@@ -1,35 +1,37 @@
 
 import { Check, Zap, Shield, Clock, Globe, Target } from 'lucide-react';
 import { motion } from 'framer-motion';
+import ToolIcon from '@/components/icons/ToolIcons';
 
+// Define feature items using our consistent icon system
 const features = [
   {
-    icon: Zap,
+    iconType: 'ai-assistant',
     title: 'Lightning Fast',
     description: 'Get results in seconds, not minutes. Our AI tools are optimized for speed and efficiency.'
   },
   {
-    icon: Check,
+    iconType: 'data-visualizer',
     title: 'Highly Accurate',
     description: 'Trained on vast datasets to ensure precision and reliability across all tasks.'
   },
   {
-    icon: Shield,
+    iconType: 'code-assistant',
     title: 'Secure & Private',
     description: 'Your data never leaves our secure servers. Privacy is our top priority.'
   },
   {
-    icon: Clock,
+    iconType: 'text-analyzer',
     title: 'Time-Saving',
     description: 'Automate repetitive tasks and focus on what truly matters to your business.'
   },
   {
-    icon: Globe,
+    iconType: 'image-enhancer',
     title: 'Multilingual',
     description: 'Support for over 50 languages for global accessibility and reach.'
   },
   {
-    icon: Target,
+    iconType: 'document-parser',
     title: 'Industry-Specific',
     description: 'Tailored solutions for healthcare, finance, legal, and many more industries.'
   }
@@ -129,15 +131,16 @@ const FeaturesSection = () => {
               {/* Animated gradient background on hover */}
               <div className="absolute -inset-1 bg-gradient-to-r from-blue-50 to-indigo-50 rounded-lg opacity-0 group-hover:opacity-70 transition-opacity duration-300 -z-10"></div>
               
-              <div className="w-16 h-16 rounded-full bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center text-white mb-6 shadow-md group-hover:scale-110 transition-transform duration-300">
-                <feature.icon className="h-8 w-8" />
+              {/* Using our consistent ToolIcon component for icons */}
+              <div className="w-16 h-16 rounded-full bg-gradient-to-br from-blue-500/20 to-indigo-600/20 flex items-center justify-center mb-6 shadow-sm group-hover:from-blue-500/30 group-hover:to-indigo-600/30 transition-all duration-300">
+                <ToolIcon type={feature.iconType as any} className="w-8 h-8" />
               </div>
               
               <h3 className="text-xl font-medium mb-4 text-gray-900">{feature.title}</h3>
               <p className="text-gray-600 leading-relaxed">{feature.description}</p>
               
-              {/* Interactive element */}
-              <div className="mt-6 pt-6 border-t border-gray-100 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+              {/* Interactive element - Fixed z-index to prevent overlap issues */}
+              <div className="mt-6 pt-6 border-t border-gray-100 opacity-0 group-hover:opacity-100 transition-opacity duration-300 relative z-20">
                 <a href="#" className="text-blue-600 font-medium flex items-center hover:text-blue-700 text-sm">
                   Learn more
                   <svg className="ml-1 w-4 h-4 transform group-hover:translate-x-1 transition-transform duration-200" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -146,12 +149,12 @@ const FeaturesSection = () => {
                 </a>
               </div>
               
-              {/* Subtle Background Design Element */}
-              <div className="absolute bottom-4 right-4 w-20 h-20 border-b-2 border-r-2 rounded-br-lg border-indigo-100 opacity-50"></div>
+              {/* Subtle Background Design Element with improved z-index */}
+              <div className="absolute bottom-4 right-4 w-20 h-20 border-b-2 border-r-2 rounded-br-lg border-indigo-100 opacity-50 z-10"></div>
               
-              {/* Animated corner accent */}
-              <div className="absolute top-0 left-0 w-16 h-16 overflow-hidden">
-                <div className="absolute top-0 left-0 w-16 h-16 bg-gradient-to-br from-blue-500 to-indigo-600 rotate-45 origin-bottom-right transform -translate-y-8 -translate-x-8 group-hover:translate-y-0 group-hover:translate-x-0 transition-transform duration-500"></div>
+              {/* Animated corner accent with fixed z-index to prevent overlap */}
+              <div className="absolute top-0 left-0 w-16 h-16 overflow-hidden z-10">
+                <div className="absolute top-0 left-0 w-16 h-16 bg-gradient-to-br from-blue-500/40 to-indigo-600/40 rotate-45 origin-bottom-right transform -translate-y-8 -translate-x-8 group-hover:translate-y-0 group-hover:translate-x-0 transition-transform duration-500"></div>
               </div>
             </motion.div>
           ))}

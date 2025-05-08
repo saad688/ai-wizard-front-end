@@ -3,27 +3,32 @@ import { Button } from '@/components/ui/button';
 import { ArrowRight } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
+import ToolIcon from '@/components/icons/ToolIcons';
 
 const steps = [
   {
     number: '01',
     title: 'Choose Your Tool',
-    description: 'Browse our extensive collection of AI tools and select the one that fits your needs.'
+    description: 'Browse our extensive collection of AI tools and select the one that fits your needs.',
+    icon: 'ai-assistant'
   },
   {
     number: '02',
     title: 'Input Your Data',
-    description: 'Upload files, paste text, or connect to your data source depending on the tool.'
+    description: 'Upload files, paste text, or connect to your data source depending on the tool.',
+    icon: 'document-parser'
   },
   {
     number: '03',
     title: 'Process & Analyze',
-    description: 'Our AI engine processes your input data with advanced algorithms for optimal results.'
+    description: 'Our AI engine processes your input data with advanced algorithms for optimal results.',
+    icon: 'data-visualizer'
   },
   {
     number: '04',
     title: 'Get Results',
-    description: 'Review, download, or integrate the output directly into your existing workflow.'
+    description: 'Review, download, or integrate the output directly into your existing workflow.',
+    icon: 'code-assistant'
   }
 ];
 
@@ -101,6 +106,12 @@ const HowItWorks = () => {
                 
                 {/* Step content */}
                 <div className="relative bg-white p-6 rounded-lg shadow-soft border border-gray-100 hover:shadow-lg transition-shadow">
+                  {/* Adding tool icon for each step */}
+                  <div className="mb-4 flex justify-center">
+                    <div className="w-12 h-12 rounded-full bg-gradient-to-r from-blue-500/20 to-indigo-600/20 flex items-center justify-center">
+                      <ToolIcon type={step.icon as any} className="w-6 h-6" />
+                    </div>
+                  </div>
                   <h3 className="text-xl font-semibold mb-4 text-gray-900">{step.title}</h3>
                   <p className="text-gray-600">{step.description}</p>
                   

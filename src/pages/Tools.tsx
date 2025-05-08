@@ -1,7 +1,7 @@
 
 import Navbar from '@/components/layout/Navbar';
 import Footer from '@/components/layout/Footer';
-import { Search, Filter, Image, MessageSquare, LineChart, FileText, Code, Mic, AudioWaveform } from 'lucide-react';
+import { Search, Filter } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import ToolsHero from '@/components/tools/ToolsHero';
@@ -11,6 +11,7 @@ import EmptyState from '@/components/tools/EmptyState';
 import FeaturedTools from '@/components/tools/FeaturedTools';
 import ToolsCta from '@/components/tools/ToolsCta';
 import { Link } from 'react-router-dom';
+import ToolIcon from '@/components/icons/ToolIcons';
 
 // Tool categories
 const categories = [
@@ -30,7 +31,7 @@ const toolsData = [
     name: "Noise Remover",
     description: "Remove unwanted noise from your audio recordings with our AI-powered noise cancellation technology.",
     category: "Voice & Audio",
-    icon: <AudioWaveform className="h-8 w-8 text-indigo-600" />,
+    icon: <ToolIcon type="noise-remover" className="h-8 w-8" />,
     popular: true
   },
   {
@@ -38,7 +39,7 @@ const toolsData = [
     name: "Image Enhancer",
     description: "Upscale and enhance images using advanced AI algorithms. Remove noise, increase resolution, and improve clarity.",
     category: "Image Processing",
-    icon: <Image className="h-8 w-8 text-indigo-600" />,
+    icon: <ToolIcon type="image-enhancer" className="h-8 w-8" />,
     popular: true
   },
   {
@@ -46,7 +47,7 @@ const toolsData = [
     name: "Text Analyzer",
     description: "Analyze text for sentiment, keywords, and readability. Get insights into your content's tone and effectiveness.",
     category: "Text Analysis",
-    icon: <MessageSquare className="h-8 w-8 text-indigo-600" />,
+    icon: <ToolIcon type="text-analyzer" className="h-8 w-8" />,
     popular: true
   },
   {
@@ -54,7 +55,7 @@ const toolsData = [
     name: "Data Visualizer",
     description: "Transform raw data into beautiful, interactive visualizations. Uncover insights and patterns in your data.",
     category: "Data Visualization",
-    icon: <LineChart className="h-8 w-8 text-indigo-600" />,
+    icon: <ToolIcon type="data-visualizer" className="h-8 w-8" />,
     popular: false
   },
   {
@@ -62,7 +63,7 @@ const toolsData = [
     name: "Document Parser",
     description: "Extract structured data from PDFs, images, and scanned documents. Convert unstructured data into usable formats.",
     category: "Document Processing",
-    icon: <FileText className="h-8 w-8 text-indigo-600" />,
+    icon: <ToolIcon type="document-parser" className="h-8 w-8" />,
     popular: true
   },
   {
@@ -70,7 +71,7 @@ const toolsData = [
     name: "Code Assistant",
     description: "Generate, debug, and optimize code across multiple programming languages. Boost your development productivity.",
     category: "Code Generation",
-    icon: <Code className="h-8 w-8 text-indigo-600" />,
+    icon: <ToolIcon type="code-assistant" className="h-8 w-8" />,
     popular: false
   },
   {
@@ -78,7 +79,7 @@ const toolsData = [
     name: "Voice Transcriber",
     description: "Convert speech to text with high accuracy. Support for multiple languages and speaker identification.",
     category: "Voice & Audio",
-    icon: <Mic className="h-8 w-8 text-indigo-600" />,
+    icon: <ToolIcon type="voice-transcriber" className="h-8 w-8" />,
     popular: true
   }
 ];

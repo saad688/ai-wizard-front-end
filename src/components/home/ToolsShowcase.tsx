@@ -2,50 +2,51 @@
 import React, { useRef, useEffect } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { ArrowRight, AudioWaveform } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import ToolIcon from '@/components/icons/ToolIcons';
 
 const tools = [
   {
     id: "noise-remover",
     name: "Noise Remover",
     description: "Remove unwanted noise from your audio with AI. Clean up recordings and enhance audio quality instantly.",
-    icon: "/images/ai-voice.svg",
+    icon: "noise-remover",
     color: "bg-cyan-50"
   },
   {
     id: "image-enhancer",
     name: "Image Enhancer",
     description: "Upscale and enhance images with AI. Remove noise and increase resolution for crystal-clear results.",
-    icon: "/images/ai-brain.svg",
+    icon: "image-enhancer",
     color: "bg-blue-50"
   },
   {
     id: "text-analyzer",
     name: "Text Analyzer",
     description: "Analyze text for sentiment, keywords, and insights. Understand the emotional tone of any content.",
-    icon: "/images/ai-document.svg",
+    icon: "text-analyzer",
     color: "bg-indigo-50"
   },
   {
     id: "data-visualizer",
     name: "Data Visualizer",
     description: "Transform raw data into beautiful interactive visualizations. Uncover patterns and insights instantly.",
-    icon: "/images/ai-analyze.svg",
+    icon: "data-visualizer",
     color: "bg-purple-50"
   },
   {
     id: "code-assistant",
     name: "Code Assistant",
     description: "Generate, debug, and optimize code across multiple programming languages. Boost your productivity.",
-    icon: "/images/ai-code.svg",
+    icon: "code-assistant",
     color: "bg-teal-50"
   },
   {
     id: "ai-assistant",
     name: "AI Assistant",
     description: "Your personal AI helper for everyday tasks. Schedule meetings, draft emails, and answer questions.",
-    icon: "/images/ai-chip.svg",
+    icon: "ai-assistant",
     color: "bg-amber-50"
   }
 ];
@@ -102,18 +103,16 @@ const ToolsShowcase = () => {
         </div>
         
         <div ref={toolsRef} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {tools.map((tool, index) => (
+          {tools.map((tool) => (
             <Card 
               key={tool.id}
               className={`tool-card opacity-0 translate-y-8 transition-all duration-500 shadow-md hover:shadow-xl ${tool.color} border-none overflow-hidden group`}
             >
               <CardContent className="p-8">
                 <div className="mb-6 flex justify-between items-start">
-                  <img 
-                    src={tool.icon} 
-                    alt="" 
-                    className="w-16 h-16 transition-transform duration-700 group-hover:rotate-12" 
-                    aria-hidden="true"
+                  <ToolIcon 
+                    type={tool.icon as any} 
+                    className="w-16 h-16 transition-transform duration-700 group-hover:rotate-12"
                   />
                   <div className="w-12 h-12 rounded-full bg-white/80 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                     <ArrowRight className="w-5 h-5 text-gray-700" />

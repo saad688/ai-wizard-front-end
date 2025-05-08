@@ -2,6 +2,7 @@
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
+import ToolIcon from '@/components/icons/ToolIcons';
 
 interface Tool {
   id: string;
@@ -53,7 +54,7 @@ const FeaturedTools = ({ tools }: FeaturedToolsProps) => {
                 <div className="absolute inset-0 bg-gradient-to-br from-indigo-500/5 to-blue-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                 <div className="flex items-start mb-4">
                   <div className="h-12 w-12 rounded-lg bg-gradient-to-r from-indigo-600/20 to-blue-500/20 flex items-center justify-center mr-4 group-hover:from-indigo-600/30 group-hover:to-blue-500/30 transition-colors duration-300">
-                    {tool.icon}
+                    <ToolIcon type={tool.id as any} className="w-8 h-8" />
                   </div>
                   <div>
                     <h3 className="text-xl font-bold text-gray-800">{tool.name}</h3>

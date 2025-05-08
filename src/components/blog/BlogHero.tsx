@@ -25,7 +25,7 @@ const BlogHero = ({ searchQuery, setSearchQuery }: BlogHeroProps) => {
         transition={{ duration: 0.7 }}
         className="container mx-auto text-center relative z-10"
       >
-        <h1 className="text-4xl md:text-5xl font-heading font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-indigo-600 to-blue-500">
+        <h1 className="text-4xl md:text-5xl font-heading font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-indigo-600 to-blue-500 pb-1">
           Our Blog
         </h1>
         <p className="text-xl max-w-3xl mx-auto mb-10 text-gray-600">
